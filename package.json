@@ -1,0 +1,15 @@
+{
+  "name": "matchtracker-site",
+  "private": true,
+  "description": "Website match-tracker.nl (statisch, GitHub Pages)",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i _build/input.css -o assets/css/site.css --minify",
+    "build:icons": "node _build/build-icons.mjs",
+    "build:images": "node _build/render-images.mjs",
+    "build": "npm run build:icons && npm run build:css"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "6.4.0",
+    "tailwindcss": "3.4.17"
+  }
+}

@@ -1,0 +1,2 @@
+# ads.txt voor match-tracker.nl
+# Nog leeg: wordt ingevuld zodra advertenties (AdSense) worden ingeschakeld.

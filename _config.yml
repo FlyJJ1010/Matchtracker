@@ -1,0 +1,7 @@
+# GitHub Pages: deze bestanden worden NIET gepubliceerd op de website.
+exclude:
+  - package.json
+  - package-lock.json
+  - tailwind.config.js
+  - node_modules
+  - app-oud.html
