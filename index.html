@@ -3,53 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MatchTracker - De professionele sport app</title>
-    
-    <!-- Tailwind CSS voor styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome voor iconen -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        slate: {
-                            850: '#151e2e',
-                            950: '#0a0f18',
-                        },
-                        brand: {
-                            400: '#34d399',
-                            500: '#10b981',
-                            600: '#059669',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .hero-glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(0,0,0,0) 70%);
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 0;
-            pointer-events: none;
-        }
-        .btn-inactive { 
-            opacity: 0.3; 
-            filter: grayscale(100%); 
-            pointer-events: none;
-        }
-    </style>
+    <title>MatchTracker – Wedstrijdklok en scoreapp voor scheidsrechters</title>
+    <meta name="description" content="MatchTracker is een wedstrijdklok en scoreapp voor scheidsrechters en coaches in voetbal en hockey. Houd speeltijd, stand, kaarten en wissels bij. Binnenkort voor Android en als iPhone-webapp.">
+    <link rel="canonical" href="https://match-tracker.nl/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="MatchTracker">
+    <meta property="og:locale" content="nl_NL">
+    <meta property="og:title" content="MatchTracker – Wedstrijdklok en scoreapp voor scheidsrechters">
+    <meta property="og:description" content="Houd speeltijd, stand, kaarten en wissels bij tijdens voetbal- en hockeywedstrijden. Binnenkort voor Android en als iPhone-webapp.">
+    <meta property="og:url" content="https://match-tracker.nl/">
+    <meta property="og:image" content="https://match-tracker.nl/assets/img/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0a0f18">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <script src="/assets/js/site.js" defer></script>
 </head>
 <body class="bg-slate-950 text-slate-300 font-sans antialiased overflow-x-hidden relative selection:bg-brand-500 selection:text-white">
 
@@ -59,7 +31,7 @@
     <nav class="relative z-10 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md sticky top-0">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-3">
+                <a href="/" class="flex items-center gap-3" aria-label="MatchTracker – naar de homepage">
                     <!-- Puur CSS Logo in plaats van externe afbeelding -->
                     <div class="w-9 h-9 rounded-xl bg-slate-900 border border-brand-500/40 shadow-lg shadow-brand-500/20 flex items-center justify-center relative shrink-0 overflow-hidden">
                         <div class="absolute w-[22px] h-[22px] rounded-full border-[2.5px] border-brand-500"></div>
@@ -68,6 +40,10 @@
                         <span class="text-white text-[10px] font-black font-mono tracking-tighter mt-0.5 relative z-10">1:0</span>
                     </div>
                     <span class="text-white font-bold text-xl tracking-wide">MatchTracker</span>
+                </a>
+                <div class="flex items-center gap-1 text-sm font-medium">
+                    <a href="/uitleg/" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Uitleg</a>
+                    <a href="/contact/" class="hidden sm:inline-block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Contact</a>
                 </div>
             </div>
         </div>
@@ -77,27 +53,27 @@
     <main class="relative z-10">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 text-center">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-sm font-medium text-slate-300 mb-6">
-                <span class="flex h-2 w-2 relative">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                <span class="flex h-2 w-2 relative shrink-0">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
                 </span>
-                Nu beschikbaar voor iOS & Android
+                Binnenkort: Android via Google Play en iPhone als webapp
             </div>
-            
+
             <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-6 leading-tight">
                 Focus op de wedstrijd,<br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">wij doen de rest.</span>
             </h1>
-            
+
             <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-                De meest complete en onverstoorbare wedstrijdklok en live-ticker voor op het sportveld. Speciaal ontworpen voor voetbal en hockey.
+                Een overzichtelijke wedstrijdklok met scorebord en wedstrijdboek voor op het sportveld. Speciaal ontworpen voor voetbal en hockey.
             </p>
 
             <!-- Grote Feature Graphic Banner (Nagebouwd met HTML/CSS) -->
             <div class="w-full max-w-3xl mx-auto rounded-3xl shadow-2xl shadow-brand-500/10 border border-slate-800 mb-12 hidden md:flex bg-gradient-to-br from-slate-900 via-slate-950 to-[#0a1120] min-h-[220px] items-center justify-center gap-8 overflow-hidden relative">
                 <!-- Glow effect in banner -->
                 <div class="absolute top-1/2 left-1/4 w-72 h-72 bg-brand-500/10 rounded-full blur-[60px] -translate-y-1/2 pointer-events-none"></div>
-                
+
                 <!-- Groot CSS Logo in banner -->
                 <div class="w-32 h-32 rounded-[2rem] bg-slate-900 border border-slate-700/50 shadow-2xl flex items-center justify-center relative z-10 shrink-0">
                     <div class="absolute w-20 h-20 rounded-full border-[5px] border-brand-500"></div>
@@ -112,29 +88,44 @@
                 </div>
             </div>
 
-            <!-- Dynamische Download Sectie -->
-            <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 max-w-lg mx-auto shadow-2xl backdrop-blur-sm">
+            <!-- Download Sectie (apparaatdetectie in /assets/js/site.js) -->
+            <div id="download" class="bg-slate-900/50 border border-slate-800 rounded-2xl p-4 sm:p-6 max-w-lg mx-auto shadow-2xl backdrop-blur-sm scroll-mt-24">
                 <h2 id="device-title" class="text-white font-semibold mb-4 text-lg">Kies jouw platform</h2>
-                
+
                 <div class="flex flex-col gap-3">
-                    <a href="https://play.google.com/store/apps/details?id=nl.jeroen.matchtracker" id="btn-android" class="flex items-center justify-center gap-3 w-full py-4 px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-brand-600 hover:from-emerald-500 hover:to-brand-500 text-white font-bold text-lg shadow-lg shadow-emerald-900/20 transition-all active:scale-95 border border-emerald-500/50">
-                        <i class="fa-brands fa-google-play text-xl"></i>
-                        Download via Google Play
-                    </a>
-                    
-                    <a href="app.html" id="btn-ios" class="flex items-center justify-center gap-3 w-full py-4 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-lg shadow-lg transition-all active:scale-95 border border-slate-700">
-                        <i class="fa-brands fa-apple text-xl"></i>
-                        Open iPhone Web-App
+                    <!-- Android: nog niet publiek. Zodra de app live is wordt dit een link naar
+                         https://play.google.com/store/apps/details?id=nl.matchtracker.app -->
+                    <div id="btn-android" aria-disabled="true" class="flex items-center justify-center gap-2 sm:gap-3 w-full py-4 px-3 sm:px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-brand-600 text-white font-bold text-base sm:text-lg whitespace-nowrap shadow-lg shadow-emerald-900/20 border border-emerald-500/50 cursor-default select-none">
+                        <svg class="icon text-xl" aria-hidden="true"><use href="/assets/icons.svg#google-play"></use></svg>
+                        Binnenkort op Google Play
+                    </div>
+
+                    <a href="/app/" id="btn-ios" class="flex items-center justify-center gap-2 sm:gap-3 w-full py-4 px-3 sm:px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-base sm:text-lg whitespace-nowrap shadow-lg transition-all active:scale-95 border border-slate-700">
+                        <svg class="icon text-xl" aria-hidden="true"><use href="/assets/icons.svg#apple"></use></svg>
+                        iPhone-webapp
+                        <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wide px-1.5 sm:px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">binnenkort</span>
                     </a>
                 </div>
 
-                <div id="ios-instructions" class="hidden mt-4 text-left bg-sky-900/20 border border-sky-800/50 rounded-xl p-4 text-sm text-sky-200">
-                    <strong class="flex items-center gap-2 text-sky-100 mb-2"><i class="fa-solid fa-circle-info"></i> Installeren op iPhone:</strong>
+                <p class="mt-4 text-sm text-slate-400 leading-relaxed">
+                    Voor Android komt MatchTracker in Google Play. Op iPhone en iPad gebruik je MatchTracker als webapp via Safari, zonder App Store.
+                </p>
+
+                <div id="ios-instructions" class="mt-4 text-left bg-sky-900/20 border border-sky-800/50 rounded-xl p-4 text-sm text-sky-200">
+                    <strong class="flex items-center gap-2 text-sky-100 mb-2">
+                        <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#circle-info"></use></svg>
+                        Installeren op iPhone of iPad (zodra de webapp beschikbaar is)
+                    </strong>
                     <ol class="list-decimal list-inside space-y-1 ml-1 opacity-90">
-                        <li>Tik op de knop 'Open iPhone Web-App' hierboven</li>
-                        <li>Tik onderin Safari op het <strong>Delen</strong> icoontje <i class="fa-solid fa-arrow-up-from-bracket mx-1"></i></li>
+                        <li>Open de webapp in <strong>Safari</strong></li>
+                        <li>Tik op het <strong>Delen</strong>-icoon <svg class="icon mx-1" aria-hidden="true"><use href="/assets/icons.svg#arrow-up-from-bracket"></use></svg></li>
                         <li>Kies <strong>'Zet op beginscherm'</strong></li>
+                        <li>Open MatchTracker voortaan via het icoon op je beginscherm</li>
                     </ol>
+                    <p class="mt-3 opacity-90 leading-relaxed">
+                        <strong class="text-sky-100">Waarom?</strong> Alleen als app op je beginscherm bewaart je iPhone je opgeslagen wedstrijden betrouwbaar. In een gewoon Safari-tabblad kan iOS die gegevens wissen als je de site een tijdje niet gebruikt.
+                        <a href="/uitleg/#iphone" class="underline underline-offset-2 text-sky-100">Meer uitleg</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -145,23 +136,23 @@
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold text-white mb-4">Gemaakt voor iedereen op en langs het veld</h2>
                 </div>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Scheidsrechters -->
                     <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/60 transition-colors">
                         <div class="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 mb-4 border border-amber-500/30">
-                            <i class="fa-solid fa-gavel text-xl"></i>
+                            <svg class="icon text-xl" aria-hidden="true"><use href="/assets/icons.svg#gavel"></use></svg>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">Voor Scheidsrechters</h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            Nooit meer twijfel over de tijd. Met de onverstoorbare achtergrond-klok, trilfuncties en het ingebouwde fluitje behoud jij 100% de controle. Registreer kaarten en doelpunten in één tik.
+                            Geen twijfel meer over de tijd. De klok rekent met de systeemtijd van je telefoon, dus de speeltijd blijft kloppen, ook als het scherm uitgaat. Registreer kaarten, wissels en doelpunten in één tik.
                         </p>
                     </div>
 
                     <!-- Coaches -->
                     <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/60 transition-colors">
                         <div class="w-12 h-12 rounded-full bg-sky-500/20 flex items-center justify-center text-sky-400 mb-4 border border-sky-500/30">
-                            <i class="fa-solid fa-clipboard-user text-xl"></i>
+                            <svg class="icon text-xl" aria-hidden="true"><use href="/assets/icons.svg#clipboard-user"></use></svg>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">Voor Coaches</h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
@@ -172,22 +163,22 @@
                     <!-- Spelers -->
                     <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/60 transition-colors">
                         <div class="w-12 h-12 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400 mb-4 border border-brand-500/30">
-                            <i class="fa-solid fa-users text-xl"></i>
+                            <svg class="icon text-xl" aria-hidden="true"><use href="/assets/icons.svg#users"></use></svg>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">Voor Spelers</h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            Een eerlijk en transparant spelverloop. Doordat de tijd en score professioneel worden vastgelegd, ontstaan er geen discussies meer over de gespeelde minuten of de exacte uitslag.
+                            Een eerlijk en transparant spelverloop. Doordat tijd en score netjes worden vastgelegd, is er minder discussie over de gespeelde minuten of de exacte uitslag.
                         </p>
                     </div>
 
                     <!-- Toeschouwers -->
                     <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/60 transition-colors">
                         <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 mb-4 border border-purple-500/30">
-                            <i class="fa-solid fa-people-group text-xl"></i>
+                            <svg class="icon text-xl" aria-hidden="true"><use href="/assets/icons.svg#people-group"></use></svg>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">Voor Toeschouwers</h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            Volg de wedstrijd vanaf de zijlijn tot op de seconde nauwkeurig. Geen onduidelijkheid meer over de resterende speeltijd of wie nou eigenlijk die laatste goal maakte.
+                            Laat de stand en de resterende speeltijd zien aan wie langs de lijn meekijkt. Geen onduidelijkheid meer over hoeveel tijd er nog op de klok staat of wie die laatste goal maakte.
                         </p>
                     </div>
                 </div>
@@ -198,15 +189,15 @@
         <div class="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-3xl font-bold text-white mb-6">Naadloze integratie voor jouw favoriete sport</h2>
+                    <h2 class="text-3xl font-bold text-white mb-6">Ingesteld op jouw sport</h2>
                     <p class="text-slate-400 mb-6 leading-relaxed">
-                        MatchTracker past zich automatisch aan de regels van jouw sport aan. Of je nu op het gras staat of op het kunstgrasveld, de app staat direct goed ingesteld.
+                        MatchTracker past zich aan de regels van jouw sport aan. Of je nu op het gras staat of op het kunstgrasveld, de app staat direct goed ingesteld.
                     </p>
-                    
+
                     <ul class="space-y-4">
                         <li class="flex items-start gap-3">
                             <div class="mt-1 w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-                                <i class="fa-solid fa-futbol text-xs"></i>
+                                <svg class="icon text-xs" aria-hidden="true"><use href="/assets/icons.svg#futbol"></use></svg>
                             </div>
                             <div>
                                 <strong class="text-white block">Voetbal Modus</strong>
@@ -215,36 +206,36 @@
                         </li>
                         <li class="flex items-start gap-3">
                             <div class="mt-1 w-6 h-6 rounded-full bg-sky-500/20 flex items-center justify-center text-sky-400 shrink-0">
-                                <i class="fa-solid fa-hockey-puck text-xs"></i>
+                                <svg class="icon text-xs" aria-hidden="true"><use href="/assets/icons.svg#hockey-puck"></use></svg>
                             </div>
                             <div>
                                 <strong class="text-white block">Hockey Modus</strong>
-                                <span class="text-slate-400 text-sm">Perfect afgestemd op 4 kwarten van 17.5 minuut, met ondersteuning voor kwartpauzes.</span>
+                                <span class="text-slate-400 text-sm">Afgestemd op 4 kwarten van 17,5 minuut, met ondersteuning voor kwartpauzes.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <div class="mt-1 w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
-                                <i class="fa-solid fa-shield-halved text-xs"></i>
+                                <svg class="icon text-xs" aria-hidden="true"><use href="/assets/icons.svg#clock"></use></svg>
                             </div>
                             <div>
-                                <strong class="text-white block">WakeLock & Achtergrondbeveiliging</strong>
-                                <span class="text-slate-400 text-sm">De klok stopt nóóit, zelfs niet als je je telefoon vergrendelt. Gebouwd op onbreekbare systeemtijd-ankers.</span>
+                                <strong class="text-white block">Klok op systeemtijd</strong>
+                                <span class="text-slate-400 text-sm">De klok rekent met de systeemtijd van je toestel. Gaat het scherm uit of vergrendel je je telefoon, dan klopt de speeltijd nog steeds zodra je weer kijkt. <a href="/uitleg/#beperkingen" class="text-indigo-300 underline underline-offset-2">Lees wat je moet weten</a>.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <div class="mt-1 w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
-                                <i class="fa-solid fa-plus text-xs"></i>
+                                <svg class="icon text-xs" aria-hidden="true"><use href="/assets/icons.svg#plus"></use></svg>
                             </div>
                             <div>
                                 <strong class="text-white block">Meer sporten in de toekomst</strong>
-                                <span class="text-slate-400 text-sm">Pre-settings voor andere sporten (zoals rugby, korfbal en waterpolo) worden in de toekomst toegevoegd!</span>
+                                <span class="text-slate-400 text-sm">Instellingen voor andere sporten (zoals rugby, korfbal en waterpolo) willen we in de toekomst toevoegen.</span>
                             </div>
                         </li>
                     </ul>
                 </div>
-                
+
                 <!-- Visuele 'Mockup' / Grafisch element gebaseerd op schermafbeelding -->
-                <div class="relative rounded-[2.5rem] bg-slate-900 border-[6px] border-slate-800 shadow-2xl shadow-brand-500/20 overflow-hidden max-w-sm mx-auto w-full flex flex-col">
+                <div class="relative rounded-[2.5rem] bg-slate-900 border-[6px] border-slate-800 shadow-2xl shadow-brand-500/20 overflow-hidden max-w-sm mx-auto w-full flex flex-col" aria-hidden="true">
                     <!-- App Header -->
                     <div class="bg-slate-800/90 backdrop-blur px-4 py-3 flex justify-between items-center border-b border-slate-700/70 shrink-0">
                         <div class="flex items-center gap-2">
@@ -261,7 +252,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- App Content -->
                     <div class="p-4 flex flex-col gap-4 bg-slate-950 flex-1">
                         <!-- Scoreboard -->
@@ -270,17 +261,17 @@
                                 <div class="col-span-5 bg-slate-900/90 rounded-xl p-2 border border-slate-800 flex flex-col items-center shadow-inner">
                                     <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-wider mb-1">Thuis (Team 1)</span>
                                     <span class="text-xs text-white font-bold mb-2">Thuis</span>
-                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-t-lg text-emerald-400 text-xs border border-slate-700"><i class="fa-solid fa-chevron-up"></i></div>
+                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-t-lg text-emerald-400 text-xs border border-slate-700"><svg class="icon"><use href="/assets/icons.svg#chevron-up"></use></svg></div>
                                     <div class="w-full bg-slate-950 text-center py-1 text-3xl font-bold text-white border-x border-slate-700 font-mono">2</div>
-                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-b-lg text-slate-500 text-xs border border-slate-700"><i class="fa-solid fa-chevron-down"></i></div>
+                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-b-lg text-slate-500 text-xs border border-slate-700"><svg class="icon"><use href="/assets/icons.svg#chevron-down"></use></svg></div>
                                 </div>
                                 <div class="col-span-1 text-center font-bold text-slate-500">:</div>
                                 <div class="col-span-5 bg-slate-900/90 rounded-xl p-2 border border-slate-800 flex flex-col items-center shadow-inner">
                                     <span class="text-[9px] font-bold text-sky-400 uppercase tracking-wider mb-1">Uit (Team 2)</span>
                                     <span class="text-xs text-white font-bold mb-2">Uit</span>
-                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-t-lg text-sky-400 text-xs border border-slate-700"><i class="fa-solid fa-chevron-up"></i></div>
+                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-t-lg text-sky-400 text-xs border border-slate-700"><svg class="icon"><use href="/assets/icons.svg#chevron-up"></use></svg></div>
                                     <div class="w-full bg-slate-950 text-center py-1 text-3xl font-bold text-white border-x border-slate-700 font-mono">1</div>
-                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-b-lg text-slate-500 text-xs border border-slate-700"><i class="fa-solid fa-chevron-down"></i></div>
+                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-b-lg text-slate-500 text-xs border border-slate-700"><svg class="icon"><use href="/assets/icons.svg#chevron-down"></use></svg></div>
                                 </div>
                             </div>
                         </div>
@@ -291,12 +282,12 @@
                                 <span class="text-[11px] font-bold text-white uppercase tracking-wider flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Wedstrijdboek</span>
                                 <span class="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">3 acties</span>
                             </div>
-                            
+
                             <!-- Action buttons -->
                             <div class="grid grid-cols-3 gap-2 mb-3">
                                 <div class="bg-yellow-500/15 border border-yellow-500/40 text-yellow-400 text-[9px] font-bold py-1.5 rounded-lg text-center">+ Geel</div>
                                 <div class="bg-rose-500/15 border border-rose-500/40 text-rose-400 text-[9px] font-bold py-1.5 rounded-lg text-center">+ Rood</div>
-                                <div class="bg-sky-500/15 border border-sky-500/40 text-sky-400 text-[9px] font-bold py-1.5 rounded-lg text-center flex justify-center items-center gap-1"><i class="fa-solid fa-right-left text-[8px]"></i> Wissel</div>
+                                <div class="bg-sky-500/15 border border-sky-500/40 text-sky-400 text-[9px] font-bold py-1.5 rounded-lg text-center flex justify-center items-center gap-1"><svg class="icon text-[8px]"><use href="/assets/icons.svg#right-left"></use></svg> Wissel</div>
                             </div>
 
                             <!-- Timeline Items -->
@@ -308,7 +299,7 @@
                                         <div class="flex-1">
                                             <div class="text-[10px] text-emerald-400 font-bold mb-0.5">THUIS <span class="text-slate-300 ml-1">2 - 1</span></div>
                                             <div class="text-[10px] text-slate-400">Doelpunt door Nr. 10</div>
-                                            <div class="text-[8px] text-slate-500 mt-1 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Tijdstip: 14:31:00 • 1e Helft (31:00)</div>
+                                            <div class="text-[8px] text-slate-500 mt-1 flex items-center gap-1"><svg class="icon"><use href="/assets/icons.svg#clock"></use></svg> Tijdstip: 14:31:00 • 1e Helft (31:00)</div>
                                         </div>
                                     </div>
                                 </div>
@@ -319,7 +310,7 @@
                                         <div class="flex-1">
                                             <div class="text-[10px] text-sky-400 font-bold mb-0.5">UIT <span class="text-slate-300 ml-1">1 - 1</span></div>
                                             <div class="text-[10px] text-slate-400">Doelpunt door Nr. 7</div>
-                                            <div class="text-[8px] text-slate-500 mt-1 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Tijdstip: 14:24:12 • 1e Helft (24:12)</div>
+                                            <div class="text-[8px] text-slate-500 mt-1 flex items-center gap-1"><svg class="icon"><use href="/assets/icons.svg#clock"></use></svg> Tijdstip: 14:24:12 • 1e Helft (24:12)</div>
                                         </div>
                                     </div>
                                 </div>
@@ -330,7 +321,7 @@
                                         <div class="flex-1">
                                             <div class="text-[10px] text-emerald-400 font-bold mb-0.5">THUIS <span class="text-slate-300 ml-1">1 - 0</span></div>
                                             <div class="text-[10px] text-slate-400">Doelpunt door Nr. 9</div>
-                                            <div class="text-[8px] text-slate-500 mt-1 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Tijdstip: 14:12:05 • 1e Helft (12:05)</div>
+                                            <div class="text-[8px] text-slate-500 mt-1 flex items-center gap-1"><svg class="icon"><use href="/assets/icons.svg#clock"></use></svg> Tijdstip: 14:12:05 • 1e Helft (12:05)</div>
                                         </div>
                                     </div>
                                 </div>
@@ -343,41 +334,14 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800/60 bg-slate-950 py-8 text-center mt-auto">
-        <p class="text-slate-500 text-sm">
-            &copy; <script>document.write(new Date().getFullYear())</script> MatchTracker. Alle rechten voorbehouden.
-        </p>
+    <footer class="relative z-10 border-t border-slate-800/60 bg-slate-950 py-8 text-center">
+        <nav aria-label="Footer" class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm mb-4">
+            <a href="/" class="text-slate-400 hover:text-white transition-colors">Home</a>
+            <a href="/uitleg/" class="text-slate-400 hover:text-white transition-colors">Uitleg &amp; FAQ</a>
+            <a href="/privacy/" class="text-slate-400 hover:text-white transition-colors">Privacy</a>
+            <a href="/contact/" class="text-slate-400 hover:text-white transition-colors">Contact</a>
+        </nav>
+        <p class="text-slate-500 text-sm">&copy; <span data-year>2026</span> MatchTracker. Alle rechten voorbehouden.</p>
     </footer>
-
-    <!-- Apparaat Detectie Script -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            const btnAndroid = document.getElementById('btn-android');
-            const btnIos = document.getElementById('btn-ios');
-            const iosInstructions = document.getElementById('ios-instructions');
-            const deviceTitle = document.getElementById('device-title');
-
-            if (/android/i.test(userAgent)) {
-                // Gebruiker zit op Android
-                deviceTitle.innerText = "Download de Android App";
-                btnIos.classList.add('btn-inactive');
-                
-                // Extra accent op Android knop
-                btnAndroid.classList.add('ring-2', 'ring-emerald-500', 'ring-offset-2', 'ring-offset-slate-900');
-            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                // Gebruiker zit op iOS
-                deviceTitle.innerText = "Start de iPhone Web-App";
-                btnAndroid.classList.add('btn-inactive');
-                
-                // Wissel knop kleuren/accenten
-                btnIos.classList.replace('bg-slate-800', 'bg-gradient-to-r');
-                btnIos.classList.add('from-sky-600', 'to-blue-600', 'border-sky-500/50', 'ring-2', 'ring-sky-500', 'ring-offset-2', 'ring-offset-slate-900');
-                
-                // Toon Safari instructies
-                iosInstructions.classList.remove('hidden');
-            }
-        });
-    </script>
 </body>
 </html>
