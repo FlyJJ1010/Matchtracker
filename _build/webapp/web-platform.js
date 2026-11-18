@@ -122,3 +122,10 @@ function setupKeepAwake() {
 }
 
 setupKeepAwake();
+
+// ---------- 4. Offline: service worker ----------
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/app/sw.js', { scope: '/app/' }).catch(() => {});
+  });
+}

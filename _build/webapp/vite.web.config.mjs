@@ -3,8 +3,9 @@
 //   node _build/webapp/build-webapp.mjs   (zie README.md in deze map)
 // De app-broncode (src/) wordt niet aangepast; alles hier is een laag eromheen.
 import { fileURLToPath } from 'node:url';
-import { dirname, resolve } from 'node:path';
-import { readFileSync } from 'node:fs';
+import { dirname, resolve, join, relative } from 'node:path';
+import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(process.env.MT_APP_DIR || 'C:/Projecten/Matchtracker-build');
@@ -71,11 +72,91 @@ function webPlatformPlugin() {
   };
 }
 
+// ---------- PWA: manifest, iPhone-instellingen en service worker ----------
+
+const THEME = '#020617'; // zelfde als <meta name="theme-color"> en de achtergrond van de app
+const SITE_ICONS = ['/favicon.ico', '/favicon.svg', '/apple-touch-icon.png', '/assets/img/icon-192.png', '/assets/img/icon-512.png', '/assets/img/icon-maskable-512.png'];
+
+const manifest = {
+  id: '/app/',
+  name: 'MatchTracker',
+  short_name: 'MatchTracker',
+  description: 'Wedstrijdklok en scoreapp voor scheidsrechters (voetbal en hockey).',
+  lang: 'nl',
+  start_url: '/app/',
+  scope: '/app/',
+  display: 'standalone',
+  orientation: 'portrait',
+  background_color: THEME,
+  theme_color: THEME,
+  icons: [
+    { src: '/assets/img/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+    { src: '/assets/img/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+    { src: '/assets/img/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+  ],
+};
+
+const PWA_HEAD = `
+    <meta name="description" content="MatchTracker: wedstrijdklok en scoreapp voor scheidsrechters (voetbal en hockey). Werkt ook zonder internet.">
+    <link rel="canonical" href="https://match-tracker.nl/app/">
+    <link rel="manifest" href="/app/manifest.json">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="MatchTracker">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+`;
+
+function walk(dir) {
+  return readdirSync(dir).flatMap((n) => {
+    const p = join(dir, n);
+    return statSync(p).isDirectory() ? walk(p) : [p];
+  });
+}
+
+function pwaPlugin() {
+  let outDir;
+  return {
+    name: 'matchtracker-pwa',
+    configResolved(config) {
+      outDir = config.build.outDir;
+    },
+    // Na de verwerking door Vite, zodat deze absolute site-paden ongewijzigd blijven.
+    transformIndexHtml: {
+      order: 'post',
+      handler: (html) => mustReplace(html, '</head>', `${PWA_HEAD}</head>`, '</head>'),
+    },
+    closeBundle() {
+      writeFileSync(join(outDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
+      // Alles wat de app nodig heeft om offline te starten. .ttf/.woff zijn reserve-formaten
+      // die moderne browsers niet laden (zij gebruiken .woff2).
+      const files = walk(outDir)
+        .map((f) => relative(outDir, f).replace(/\\/g, '/'))
+        .filter((f) => !/\.(ttf|woff)$/.test(f) && f !== 'sw.js')
+        .sort();
+      const precache = files.map((f) => (f === 'index.html' ? '/app/' : `/app/${f}`)).concat(SITE_ICONS);
+      // Versie = vingerafdruk van alle bestanden: elke wijziging in de app geeft een nieuwe cache.
+      const hash = createHash('sha256');
+      for (const f of files) hash.update(f).update(readFileSync(join(outDir, f)));
+      hash.update(readFileSync(resolve(here, 'sw.template.js'))).update(JSON.stringify(precache));
+      for (const icon of SITE_ICONS) hash.update(readFileSync(join(here, '..', '..', icon)));
+      const version = `${pkg.version}-${hash.digest('hex').slice(0, 10)}`;
+      const sw = readFileSync(resolve(here, 'sw.template.js'), 'utf8')
+        .replace('__VERSION__', version)
+        .replace('__PRECACHE__', JSON.stringify(precache, null, 2));
+      writeFileSync(join(outDir, 'sw.js'), sw);
+      console.log(`service worker: versie ${version}, ${precache.length} bestanden offline`);
+    },
+  };
+}
+
 export default {
   root: appRoot,
   base: '/app/',
   logLevel: 'warn',
-  plugins: [webPlatformPlugin()],
+  plugins: [webPlatformPlugin(), pwaPlugin()],
   resolve: {
     alias: [
       { find: /^@capacitor\/core$/, replacement: stub('capacitor-core.js') },

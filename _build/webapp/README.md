@@ -17,3 +17,7 @@ Wat de webbuild doet, zonder de app-code (`src/`) aan te passen:
   "Reclame verwijderen"-balk, aankoopmeldingen, koopscherm, tandwiel-items en de advertentiestatus.
   Verandert de app-HTML zodat een element niet meer gevonden wordt, dan stopt de build met een melding.
 - Privacybeleid-knop wijst naar https://match-tracker.nl/privacy/.
+- PWA: `app/manifest.json` (standalone, themakleur, iconen) en `app/sw.js` (scope `/app/`),
+  gemaakt uit `sw.template.js`. De service worker bewaart de hele app offline. Het versienummer
+  is een vingerafdruk van alle bestanden: na elke nieuwe build komt de update vanzelf door
+  (de oude cache wordt opgeruimd).
