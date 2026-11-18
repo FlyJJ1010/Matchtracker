@@ -3,7 +3,6 @@ module.exports = {
   content: [
     './index.html',
     './404.html',
-    './app/**/*.html',
     './uitleg/**/*.html',
     './privacy/**/*.html',
     './contact/**/*.html',
