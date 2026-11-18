@@ -2,94 +2,725 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webversie binnenkort – MatchTracker</title>
-    <meta name="description" content="De iPhone-webapp van MatchTracker, de wedstrijdklok en scoreapp voor scheidsrechters, komt binnenkort beschikbaar.">
-    <meta name="robots" content="noindex">
-    <link rel="canonical" href="https://match-tracker.nl/app/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="MatchTracker">
-    <meta property="og:locale" content="nl_NL">
-    <meta property="og:title" content="MatchTracker webapp – binnenkort">
-    <meta property="og:description" content="De iPhone-webapp van MatchTracker komt binnenkort beschikbaar.">
-    <meta property="og:url" content="https://match-tracker.nl/app/">
-    <meta property="og:image" content="https://match-tracker.nl/assets/img/og-image.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="#0a0f18">
-    <link rel="icon" href="/favicon.ico" sizes="32x32">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="stylesheet" href="/assets/css/site.css">
-    <script src="/assets/js/site.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MatchTracker - Voetbal & Hockey</title>
+    <meta name="theme-color" content="#020617">
+    <script>window.MT_PLATFORM = "web";</script>
+  <script type="module" crossorigin src="/app/assets/index-C8qfjU6H.js"></script>
+  <link rel="stylesheet" crossorigin href="/app/assets/index-CXIcIWdd.css">
 </head>
-<body class="bg-slate-950 text-slate-300 font-sans antialiased overflow-x-hidden relative min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex justify-center items-start sm:py-4">
 
-    <div class="hero-glow"></div>
-
-    <!-- Navigatie -->
-    <nav class="relative z-10 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md sticky top-0">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <a href="/" class="flex items-center gap-3" aria-label="MatchTracker – naar de homepage">
-                    <div class="w-9 h-9 rounded-xl bg-slate-900 border border-brand-500/40 shadow-lg shadow-brand-500/20 flex items-center justify-center relative shrink-0 overflow-hidden">
-                        <div class="absolute w-[22px] h-[22px] rounded-full border-[2.5px] border-brand-500"></div>
-                        <div class="absolute top-[2px] w-2 h-1 bg-brand-500 rounded-sm"></div>
-                        <div class="absolute top-[6px] right-[5px] w-1.5 h-1.5 bg-brand-500 rounded-sm rotate-45"></div>
-                        <span class="text-white text-[10px] font-black font-mono tracking-tighter mt-0.5 relative z-10">1:0</span>
+    <!-- Android Telefoon Container -->
+    <div id="app-shell" class="w-full max-w-md bg-slate-900 min-h-screen sm:min-h-[860px] sm:rounded-[2.5rem] sm:border-[6px] sm:border-slate-800 shadow-2xl flex flex-col justify-between overflow-hidden relative">
+        
+        <!-- Bovenste App Balk -->
+        <header class="shrink-0 bg-slate-800/90 backdrop-blur px-4 py-3 flex flex-wrap gap-2 justify-between items-center border-b border-slate-700/70">
+            <div class="flex-1 basis-0 min-w-min flex items-center space-x-2.5">
+                <div class="shrink-0 w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                    <i id="sport-icon" class="fa-solid fa-futbol text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <h1 class="font-bold text-sm sm:text-base leading-tight tracking-wide text-white">MatchTracker</h1>
+                        <span id="pro-badge" class="hidden text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">PRO</span>
                     </div>
-                    <span class="text-white font-bold text-xl tracking-wide">MatchTracker</span>
-                </a>
-                <div class="flex items-center gap-1 text-sm font-medium">
-                    <a href="/uitleg/" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Uitleg</a>
-                    <a href="/contact/" class="hidden sm:inline-block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Contact</a>
+                    <p class="text-[10px] text-slate-400">Scheidsrechter & Score App</p>
+                </div>
+            </div>
+            
+            <div class="ml-auto flex items-center space-x-1">
+                <!-- Scherm vergrendelen (broekzak) -->
+                <button data-action="lock-screen" id="lock-btn" title="Scherm vergrendelen" aria-label="Scherm vergrendelen" class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 text-slate-300 flex items-center justify-center transition active:scale-95">
+                    <i class="fa-solid fa-lock text-xs"></i>
+                </button>
+                <!-- Geluid & Trillen aan/uit knop -->
+                <button data-action="toggle-sound" id="alert-toggle-btn" title="Geluid & Trillen aan/uit" class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center transition active:scale-95">
+                    <i id="alert-toggle-icon" class="fa-solid fa-volume-high text-xs"></i>
+                </button>
+                <!-- Instellingen (privacy, reclame verwijderen) -->
+                <button data-action="open-settings" title="Instellingen" class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 text-slate-300 flex items-center justify-center transition active:scale-95">
+                    <i class="fa-solid fa-gear text-xs"></i>
+                </button>
+                <!-- Sport wisselaar -->
+                <button data-action="toggle-sport" id="sport-btn" class="whitespace-nowrap text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 px-2.5 py-1.5 rounded-full font-medium transition flex items-center gap-1.5 border border-slate-600 active:scale-95">
+                    <span id="sport-label">Voetbal</span>
+                    <i class="fa-solid fa-repeat text-[10px] text-emerald-400"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hoofdinhoud -->
+        <main id="main-scroll-area" class="flex-1 p-3.5 flex flex-col gap-3.5 overflow-y-auto min-h-0 pb-6">
+            
+            <!-- IN-APP AANKOOP: "Reclame verwijderen" (prijs uit Google Play) -->
+            <div id="upgrade-banner" class="shrink-0 bg-gradient-to-r from-indigo-900/80 via-blue-900/70 to-slate-800 rounded-2xl px-3.5 py-2.5 border border-indigo-500/40 shadow-md flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-8 h-8 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 flex-shrink-0">
+                        <i class="fa-solid fa-crown text-sm"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <div class="text-[11px] text-indigo-200 font-medium leading-tight">Reclamevrij fluiten?</div>
+                        <div class="text-xs font-bold text-white truncate"><span>Reclame verwijderen</span><span id="upgrade-price" class="hidden"></span></div>
+                    </div>
+                </div>
+                <button data-action="open-billing" class="bg-white hover:bg-indigo-50 active:scale-95 text-indigo-950 font-extrabold text-xs px-3 py-1.5 rounded-xl shadow transition flex-shrink-0">
+                    Bekijk
+                </button>
+            </div>
+
+            <!-- Aankoopmelding: in behandeling, controle mislukt, terugbetaald -->
+            <div id="billing-notice" class="hidden shrink-0 bg-sky-500/10 border border-sky-500/40 rounded-2xl px-3.5 py-2.5" role="status" aria-live="polite">
+                <div class="flex items-start gap-3">
+                    <i id="billing-notice-icon" class="fa-solid fa-hourglass-half text-sky-300 mt-0.5"></i>
+                    <p id="billing-notice-text" class="flex-1 min-w-0 text-xs text-sky-100 leading-snug"></p>
+                    <button data-action="dismiss-billing-notice" class="shrink-0 text-sky-300 hover:text-white" aria-label="Melding sluiten"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <button id="billing-notice-restore" data-action="restore-purchase" class="hidden mt-2 text-xs font-bold bg-sky-400 hover:bg-sky-300 text-slate-950 px-3 py-1.5 rounded-xl active:scale-95 transition">Aankoop herstellen</button>
+            </div>
+
+            <!-- 1. TIJD & HELFT/KWART SECTIE -->
+            <!-- Hint: native eindsignaal staat nog niet klaar (niet-blokkerend) -->
+            <div id="whistle-hint" class="hidden shrink-0 bg-amber-500/10 border border-amber-500/40 rounded-2xl px-3.5 py-2.5 flex items-center gap-3">
+                <i class="fa-solid fa-bell-slash text-amber-300"></i>
+                <p id="whistle-hint-text" class="flex-1 min-w-0 text-xs text-amber-100 leading-snug">Fluitsignaal bij scherm uit staat nog niet klaar.</p>
+                <button id="whistle-hint-btn" data-action="open-whistle-setup" class="shrink-0 whitespace-nowrap text-xs font-bold bg-amber-400 hover:bg-amber-300 text-slate-950 px-3 py-1.5 rounded-xl active:scale-95 transition">Klaarzetten</button>
+            </div>
+
+            <section id="time-section" class="shrink-0 bg-slate-800/90 rounded-2xl p-3.5 border border-slate-700/80 shadow-lg relative overflow-hidden">
+                <!-- Subtiele achtergrond gloed als timer loopt -->
+                <div id="timer-glow" class="absolute inset-0 bg-emerald-500/5 opacity-0 transition-opacity duration-500 pointer-events-none"></div>
+
+                <!-- Switch: 2 Helften of 4 Kwarten & Minuut Instelling -->
+                <div class="flex flex-wrap justify-between items-center mb-2.5 gap-2">
+                    <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-700/80">
+                        <button id="mode-halves-btn" data-action="set-mode" data-arg="2" class="py-1 px-2.5 rounded-lg text-xs font-bold bg-slate-700 text-emerald-400 shadow transition">
+                            2 Helften
+                        </button>
+                        <button id="mode-quarters-btn" data-action="set-mode" data-arg="4" class="py-1 px-2.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+                            4 Kwarten
+                        </button>
+                    </div>
+
+                    <div class="flex items-center bg-slate-900 px-2.5 py-1 rounded-xl border border-slate-700/80">
+                        <label id="duration-label" for="half-duration" class="text-xs text-slate-400 mr-1.5 font-medium">Min/helft:</label>
+                        <input type="number" id="half-duration" value="45" min="0.5" max="120" step="0.5" class="w-14 bg-slate-800 text-white font-bold text-center text-sm rounded border border-slate-600 focus:outline-none focus:border-emerald-500 py-0.5">
+                    </div>
+                </div>
+
+                <!-- Periode Knoppen (1e/2e Helft of 1e t/m 4e Kwart) -->
+                <div id="period-buttons-container" class="grid grid-cols-2 bg-slate-900 p-1 rounded-xl border border-slate-700/80 mb-2 gap-1">
+                    <!-- Wordt dynamisch gevuld door JavaScript -->
+                </div>
+
+                <!-- Overzicht van vastgelegde tijden per helft / kwart -->
+                <div id="period-times-summary" class="mb-2.5 bg-slate-900/70 rounded-xl px-3 py-2 border border-slate-800/90">
+                    <!-- Wordt dynamisch gevuld door JavaScript -->
+                </div>
+
+                <!-- Grote Digitale Klok -->
+                <div id="clock-box" class="text-center my-1.5 py-2 bg-slate-950/90 rounded-xl border border-slate-800 relative transition-all duration-300">
+                    <div id="time-display" class="font-digital text-5xl sm:text-6xl font-bold tracking-wider text-white drop-shadow">
+                        00:00
+                    </div>
+                    <div class="flex justify-center items-center gap-2 mt-1">
+                        <span id="status-badge" class="inline-block w-2 h-2 rounded-full bg-amber-400"></span>
+                        <span id="time-status-text" class="text-[11px] uppercase tracking-widest text-slate-400 font-semibold">Gepauzeerd (Doel: 45:00)</span>
+                    </div>
+                    <!-- Indicator voor achtergrond- en schermbeveiliging -->
+                    <div class="mt-1 flex justify-center items-center gap-1.5 text-[10px] text-slate-400">
+                        <i id="bg-guard-icon" class="fa-solid fa-bell-slash text-amber-400"></i>
+                        <span id="bg-guard-text">Eindsignaal alleen met de app open</span>
+                    </div>
+                </div>
+
+                <!-- Start / Pauze / Reset Tijd Knoppen -->
+                <div class="grid grid-cols-3 gap-2 mt-2.5">
+                    <button id="btn-start" data-action="start" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold py-2.5 rounded-xl shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-1.5 text-sm transition">
+                        <i class="fa-solid fa-play text-xs"></i> Start
+                    </button>
+                    <button id="btn-pause" data-action="pause" class="bg-amber-600 hover:bg-amber-500 active:scale-95 text-white font-bold py-2.5 rounded-xl shadow-lg shadow-amber-950/50 flex items-center justify-center gap-1.5 text-sm transition opacity-50 cursor-not-allowed" disabled>
+                        <i class="fa-solid fa-pause text-xs"></i> Pauze
+                    </button>
+                    <button data-action="reset-time" class="bg-slate-700 hover:bg-slate-600 active:scale-95 text-slate-200 font-semibold py-2.5 rounded-xl border border-slate-600 flex items-center justify-center gap-1.5 text-xs sm:text-sm transition">
+                        <i class="fa-solid fa-rotate-left text-xs"></i> Reset Tijd
+                    </button>
+                </div>
+
+                <!-- Rust / Kwartpauze / Einde Wedstrijd Balk -->
+                <div class="mt-2.5 pt-2.5 border-t border-slate-700/70">
+                    <!-- Standaard knop om rust te starten of wedstrijd te beëindigen -->
+                    <div id="break-idle-bar" class="flex items-center justify-between gap-2">
+                        <button id="btn-start-break" data-action="period-end" class="w-full bg-indigo-600/25 hover:bg-indigo-600/40 active:scale-95 text-indigo-300 border border-indigo-500/40 font-semibold py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                            <i id="btn-start-break-icon" class="fa-solid fa-mug-hot text-indigo-400"></i>
+                            <span id="btn-start-break-label">Start Rust (na 1e Helft)</span>
+                        </button>
+                    </div>
+
+                    <!-- Actieve Rust-teller balk (zichtbaar tijdens rust) -->
+                    <div id="break-active-bar" class="hidden bg-indigo-950/80 border border-indigo-500/50 rounded-xl p-2.5 flex items-center justify-between gap-2 shadow-inner">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-lg bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300">
+                                <i class="fa-solid fa-mug-hot text-sm animate-bounce"></i>
+                            </div>
+                            <div>
+                                <div class="text-[10px] uppercase tracking-wider font-bold text-indigo-300 flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-ping"></span>
+                                    <span id="break-title-label">Rustduur</span>
+                                </div>
+                                <div id="break-time-display" class="font-digital text-xl font-bold text-white leading-tight">
+                                    00:00
+                                </div>
+                            </div>
+                        </div>
+                        <button data-action="next-period" id="btn-next-period" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold py-2 px-3 rounded-xl text-xs shadow-lg flex items-center gap-1.5 transition">
+                            <i class="fa-solid fa-forward-step"></i>
+                            <span id="btn-next-period-label">Start 2e Helft</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. SCOREBORD & TEAMS SECTIE -->
+            <section id="score-section" class="shrink-0 bg-slate-800/90 rounded-2xl p-3.5 border border-slate-700/80 shadow-lg">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400"><i class="fa-solid fa-trophy text-emerald-400 mr-1.5"></i>Scorebord</span>
+                    <button data-action="reset-score" class="text-xs bg-slate-700/80 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-600 transition flex items-center gap-1 active:scale-95">
+                        <i class="fa-solid fa-arrows-rotate text-[10px]"></i> Score Reset
+                    </button>
+                </div>
+
+                <!-- Switch: Scoren met of zonder spelersnaam -->
+                <div class="flex justify-between items-center bg-slate-900/80 px-3 py-2 rounded-xl border border-slate-800 mb-2.5">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-user-pen text-emerald-400 text-xs"></i>
+                        <span class="text-xs text-slate-300 font-medium">Doelpuntenmaker vastleggen</span>
+                    </div>
+                    <button type="button" id="track-scorers-switch" data-action="toggle-scorers" class="w-10 h-5 bg-slate-700 rounded-full relative transition-colors duration-200 p-0.5 flex items-center border border-slate-600">
+                        <div id="track-scorers-knob" class="w-4 h-4 bg-slate-300 rounded-full shadow-md transform transition-transform duration-200 translate-x-0"></div>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-11 items-center gap-2">
+                    <!-- TEAM THUIS (Team 1) -->
+                    <div class="col-span-5 flex flex-col items-center bg-slate-900/90 p-2.5 rounded-xl border border-slate-800">
+                        <span class="text-[10px] uppercase tracking-wider text-emerald-400 font-bold mb-1">Thuis (Team 1)</span>
+                        <input type="text" id="team1-name" value="Thuis" placeholder="Naam Thuis" class="w-full bg-slate-800/90 text-center font-bold text-white text-sm rounded-lg px-2 py-1 border border-slate-700 focus:outline-none focus:border-emerald-500 mb-2 truncate">
+                        
+                        <!-- Pijltje Omhoog -->
+                        <button data-action="score" data-arg="1,1" class="w-full py-1.5 bg-slate-800 hover:bg-emerald-600/30 active:bg-emerald-600/50 text-emerald-400 rounded-t-xl border border-slate-700 flex justify-center items-center transition active:scale-95">
+                            <i class="fa-solid fa-chevron-up text-lg"></i>
+                        </button>
+                        
+                        <!-- Score Cijfer -->
+                        <div id="score-team1" class="font-digital text-4xl sm:text-5xl font-bold text-white py-1.5 w-full text-center bg-slate-950 border-x border-slate-700">
+                            0
+                        </div>
+                        
+                        <!-- Pijltje Omlaag -->
+                        <button data-action="score" data-arg="1,-1" class="w-full py-1.5 bg-slate-800 hover:bg-rose-600/30 active:bg-rose-600/50 text-slate-400 hover:text-rose-400 rounded-b-xl border border-slate-700 flex justify-center items-center transition active:scale-95">
+                            <i class="fa-solid fa-chevron-down text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Scheidingsteken -->
+                    <div class="col-span-1 flex flex-col items-center justify-center">
+                        <span class="font-digital text-3xl font-bold text-slate-500">:</span>
+                    </div>
+
+                    <!-- TEAM UIT (Team 2) -->
+                    <div class="col-span-5 flex flex-col items-center bg-slate-900/90 p-2.5 rounded-xl border border-slate-800">
+                        <span class="text-[10px] uppercase tracking-wider text-sky-400 font-bold mb-1">Uit (Team 2)</span>
+                        <input type="text" id="team2-name" value="Uit" placeholder="Naam Uit" class="w-full bg-slate-800/90 text-center font-bold text-white text-sm rounded-lg px-2 py-1 border border-slate-700 focus:outline-none focus:border-sky-500 mb-2 truncate">
+                        
+                        <!-- Pijltje Omhoog -->
+                        <button data-action="score" data-arg="2,1" class="w-full py-1.5 bg-slate-800 hover:bg-sky-600/30 active:bg-sky-600/50 text-sky-400 rounded-t-xl border border-slate-700 flex justify-center items-center transition active:scale-95">
+                            <i class="fa-solid fa-chevron-up text-lg"></i>
+                        </button>
+                        
+                        <!-- Score Cijfer -->
+                        <div id="score-team2" class="font-digital text-4xl sm:text-5xl font-bold text-white py-1.5 w-full text-center bg-slate-950 border-x border-slate-700">
+                            0
+                        </div>
+                        
+                        <!-- Pijltje Omlaag -->
+                        <button data-action="score" data-arg="2,-1" class="w-full py-1.5 bg-slate-800 hover:bg-rose-600/30 active:bg-rose-600/50 text-slate-400 hover:text-rose-400 rounded-b-xl border border-slate-700 flex justify-center items-center transition active:scale-95">
+                            <i class="fa-solid fa-chevron-down text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. WEDSTRIJDBOEK (TV-STIJL LIVE TICKER & LOGBOEK) -->
+            <section id="log-section" class="shrink-0 grow bg-slate-800/90 rounded-2xl p-3.5 border border-slate-700/80 shadow-lg flex flex-col">
+                <div class="flex justify-between items-center mb-2.5">
+                    <div class="flex items-center gap-2">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        </span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-white">
+                            Wedstrijdboek <span class="text-slate-400 font-normal">(Live Log)</span>
+                        </span>
+                    </div>
+                    <span id="card-count-badge" class="text-[11px] bg-slate-900 text-emerald-400 font-semibold px-2.5 py-0.5 rounded-full border border-slate-700">
+                        0 acties
+                    </span>
+                </div>
+
+                <!-- Knoppen om kaart of wissel toe te voegen -->
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <button data-action="open-card" data-arg="Geel" class="bg-yellow-500/15 hover:bg-yellow-500/25 active:scale-95 border border-yellow-500/40 text-yellow-300 font-bold py-2 px-2 rounded-xl flex items-center justify-center gap-1.5 text-xs transition shadow">
+                        <span class="w-3 h-4 bg-yellow-400 rounded-sm inline-block shadow-sm border border-yellow-200"></span>
+                        + Geel
+                    </button>
+                    <button data-action="open-card" data-arg="Rood" class="bg-rose-500/15 hover:bg-rose-500/25 active:scale-95 border border-rose-500/40 text-rose-300 font-bold py-2 px-2 rounded-xl flex items-center justify-center gap-1.5 text-xs transition shadow">
+                        <span class="w-3 h-4 bg-rose-600 rounded-sm inline-block shadow-sm border border-rose-400"></span>
+                        + Rood
+                    </button>
+                    <button data-action="open-sub" class="bg-sky-500/15 hover:bg-sky-500/25 active:scale-95 border border-sky-500/40 text-sky-300 font-bold py-2 px-2 rounded-xl flex items-center justify-center gap-1.5 text-xs transition shadow">
+                        <i class="fa-solid fa-right-left text-xs"></i>
+                        + Wissel
+                    </button>
+                </div>
+
+                <!-- TV-Stijl Tijdlijn met systeemtijd en wedstrijdminuut -->
+                <div id="cards-list" class="grow bg-slate-950/90 rounded-xl p-3 border border-slate-800/90 overflow-y-auto max-h-64 space-y-2.5 shadow-inner">
+                    <p id="empty-cards-msg" class="text-xs text-slate-500 text-center py-6 italic">
+                        Nog geen gebeurtenissen in het wedstrijdboek.<br>Druk op <b class="text-slate-400">Start</b> om de wedstrijd te openen.
+                    </p>
+                </div>
+
+                <!-- Nieuwe wedstrijd (bewust ver van Start/Pauze) -->
+                <div class="mt-3 pt-3 border-t border-slate-700/50">
+                    <button id="btn-new-match" data-action="new-match" class="w-full bg-slate-900 hover:bg-slate-900/70 active:scale-[0.99] border border-emerald-500/40 text-emerald-300 font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 text-sm transition">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                        Nieuwe wedstrijd
+                    </button>
+                    <p class="text-[10px] text-slate-400 mt-1.5 leading-snug">
+                        <b class="text-slate-300">Score Reset</b> zet alleen de stand op 0. <b class="text-slate-300">Reset Tijd</b> zet alleen de klok van deze periode op 00:00.
+                        <b class="text-slate-300">Nieuwe wedstrijd</b> bewaart deze wedstrijd onder Wedstrijden en begint helemaal opnieuw.
+                    </p>
+                </div>
+
+                <!-- Advertentie-status -->
+                <div class="mt-2.5 pt-2 border-t border-slate-700/50 flex justify-between items-center text-[10px] text-slate-400">
+                    <span id="ad-status-label"><i class="fa-solid fa-rectangle-ad mr-1 text-slate-400"></i>Status: Gratis versie (met reclame)</span>
+                </div>
+            </section>
+
+        </main>
+
+
+        <!-- INSTELLINGEN MODAL -->
+        <div id="settings-modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-[105] hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-5 shadow-2xl">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-700">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-lg bg-slate-700 border border-slate-600 flex items-center justify-center text-slate-200">
+                            <i class="fa-solid fa-gear text-sm"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Instellingen</h3>
+                    </div>
+                    <button data-action="close-settings" class="text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Fluitsignaal bij scherm uit (native exact alarm) -->
+                <div id="settings-whistle" class="hidden mb-4 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3">
+                    <div class="flex items-center gap-2 mb-1">
+                        <i class="fa-solid fa-bell text-emerald-400 w-4 text-center"></i>
+                        <span class="text-sm font-bold text-white">Fluitsignaal bij scherm uit</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mb-2 leading-snug">Zodat het eindsignaal ook klinkt met het scherm uit of de app op de achtergrond. Android vraagt twee dingen: <b class="text-slate-300">meldingen</b> tonen en <b class="text-slate-300">Wekkers en herinneringen</b>.</p>
+                    <p id="settings-whistle-status" class="text-xs text-slate-200 mb-2"></p>
+                    <p id="settings-alarm-volume-warning" class="hidden mb-2 bg-rose-500/15 border border-rose-500/40 rounded-lg px-2.5 py-2 text-xs text-rose-200 leading-snug"><i class="fa-solid fa-volume-xmark mr-1"></i><b>Alarmvolume staat (bijna) uit, je hoort geen fluit.</b> Zet het alarmvolume hoger (volumeknop → instellingen → Alarmvolume).</p>
+                    <button id="settings-whistle-setup" data-action="whistle-setup" class="w-full py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm active:scale-[0.99] transition">Fluitsignaal klaarzetten</button>
+                    <div id="settings-battery-tip" class="hidden mt-3 bg-amber-500/10 border border-amber-500/40 rounded-lg p-2.5 text-[11px] text-amber-100 leading-snug">
+                        <b>Tip:</b> sommige telefoons sluiten apps hard af om batterij te sparen, waardoor het signaal kan wegvallen. Zet batterij-optimalisatie voor MatchTracker uit.
+                        <div class="flex gap-2 mt-2">
+                            <button data-action="open-battery-settings" class="flex-1 py-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold">Batterij-instellingen</button>
+                            <button data-action="dismiss-battery-tip" class="flex-1 py-1.5 rounded-lg bg-slate-700 text-slate-200 font-semibold">Begrepen</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2 mb-4">
+                    <!-- Scherm aan houden (standaard uit) -->
+                    <div class="w-full flex items-center gap-3 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3">
+                        <i class="fa-solid fa-sun text-amber-300 w-4 text-center"></i>
+                        <span class="flex-1">
+                            <span class="block text-sm font-bold text-white">Scherm aan houden</span>
+                            <span class="block text-[11px] text-slate-400">Alleen zolang de app open is. Kost batterij.</span>
+                        </span>
+                        <button type="button" id="settings-keepawake" role="switch" aria-checked="false" aria-label="Scherm aan houden" data-action="toggle-keep-awake" class="shrink-0 w-10 h-5 bg-slate-700 rounded-full relative transition-colors duration-200 p-0.5 flex items-center border border-slate-600">
+                            <span id="settings-keepawake-knob" class="w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-200 translate-x-0"></span>
+                        </button>
+                    </div>
+                    <button id="settings-battery" data-action="open-battery-settings" class="hidden w-full flex items-center gap-3 bg-slate-900 hover:bg-slate-900/70 border border-slate-700 rounded-xl px-3.5 py-3 text-left transition active:scale-[0.99]">
+                        <i class="fa-solid fa-battery-half text-amber-300 w-4 text-center"></i>
+                        <span class="flex-1">
+                            <span class="block text-sm font-bold text-white">Batterij-optimalisatie</span>
+                            <span class="block text-[11px] text-slate-400">Uitzetten voorkomt dat het signaal wegvalt</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
+                    </button>
+                    <button id="settings-remove-ads" data-action="open-billing" class="w-full flex items-center gap-3 bg-slate-900 hover:bg-slate-900/70 border border-slate-700 rounded-xl px-3.5 py-3 text-left transition active:scale-[0.99]">
+                        <i class="fa-solid fa-crown text-amber-300 w-4 text-center"></i>
+                        <span class="flex-1">
+                            <span class="block text-sm font-bold text-white">Reclame verwijderen</span>
+                            <span id="settings-remove-ads-sub" class="block text-[11px] text-slate-400">Eenmalige aankoop via Google Play</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
+                    </button>
+                    <button id="settings-restore" data-action="restore-purchase" class="w-full flex items-center gap-3 bg-slate-900 hover:bg-slate-900/70 border border-slate-700 rounded-xl px-3.5 py-3 text-left transition active:scale-[0.99]">
+                        <i class="fa-solid fa-rotate text-amber-300 w-4 text-center"></i>
+                        <span class="flex-1">
+                            <span class="block text-sm font-bold text-white">Aankoop herstellen</span>
+                            <span class="block text-[11px] text-slate-400">Al gekocht, bijv. op een andere telefoon met hetzelfde Google-account</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
+                    </button>
+                    <button id="settings-privacy" data-action="privacy-options" class="hidden w-full flex items-center gap-3 bg-slate-900 hover:bg-slate-900/70 border border-slate-700 rounded-xl px-3.5 py-3 text-left transition active:scale-[0.99]">
+                        <i class="fa-solid fa-user-shield text-sky-400 w-4 text-center"></i>
+                        <span class="flex-1">
+                            <span class="block text-sm font-bold text-white">Privacy-instellingen</span>
+                            <span class="block text-[11px] text-slate-400">Toestemming voor advertenties wijzigen</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
+                    </button>
+                    <button id="settings-history" data-action="open-history" class="w-full flex items-center gap-3 bg-slate-900 hover:bg-slate-900/70 border border-slate-700 rounded-xl px-3.5 py-3 text-left transition active:scale-[0.99]">
+                        <i class="fa-solid fa-clock-rotate-left text-emerald-400 w-4 text-center"></i>
+                        <span class="flex-1">
+                            <span class="block text-sm font-bold text-white">Wedstrijden</span>
+                            <span class="block text-[11px] text-slate-400">Bewaarde wedstrijden bekijken, delen of verwijderen</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
+                    </button>
+                    <button id="settings-privacy-policy" data-action="open-privacy-policy" class="w-full flex items-center gap-3 bg-slate-900 hover:bg-slate-900/70 border border-slate-700 rounded-xl px-3.5 py-3 text-left transition active:scale-[0.99] disabled:opacity-60">
+                        <i class="fa-solid fa-file-shield text-sky-400 w-4 text-center"></i>
+                        <span class="flex-1">
+                            <span class="block text-sm font-bold text-white">Privacybeleid</span>
+                            <span id="settings-privacy-policy-sub" class="block text-[11px] text-slate-400">Online, of zonder internet in de app</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500"></i>
+                    </button>
+                </div>
+
+                <div class="flex justify-between items-center text-[11px] text-slate-500">
+                    <span id="settings-version">Versie</span>
+                    <span id="settings-test-ads" class="hidden px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30 font-semibold">Testadvertenties</span>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <main class="relative z-10 flex-1">
-        <div class="max-w-xl mx-auto px-4 sm:px-6 pt-16 pb-16 text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-sm font-medium text-slate-300 mb-6">
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
-                In voorbereiding
-            </div>
+        <!-- GOOGLE PLAY IN-APP AANKOOP: "Reclame verwijderen" (prijs uit Google Play) -->
+        <div id="billing-modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-[110] hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-5 shadow-2xl">
+                <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-700">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-brands fa-google-play text-emerald-400 text-lg"></i>
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Aankoop via Google Play</span>
+                    </div>
+                    <button data-action="close-billing" class="text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
 
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-5 leading-tight">
-                De webversie komt binnenkort
-            </h1>
+                <div class="flex items-center gap-3 bg-slate-900 p-3 rounded-xl border border-slate-700 mb-4">
+                    <div class="w-11 h-11 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 flex-shrink-0">
+                        <i class="fa-solid fa-crown text-xl"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-bold text-white text-sm">Reclame verwijderen</h4>
+                        <p class="text-xs text-slate-400">Eenmalige aankoop, geen abonnement.</p>
+                    </div>
+                    <div id="billing-price-box" class="hidden text-right">
+                        <span id="billing-price" class="font-digital font-bold text-lg text-emerald-400"></span>
+                        <span class="block text-[9px] text-slate-400">eenmalig</span>
+                    </div>
+                </div>
 
-            <p class="text-lg text-slate-400 leading-relaxed mb-8">
-                We maken de webapp van MatchTracker klaar voor de iPhone en iPad. Zodra hij beschikbaar is, open je hem op deze pagina in Safari en zet je hem op je beginscherm. Dan werkt hij als een gewone app, ook zonder internetverbinding.
-            </p>
-
-            <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 text-left mb-8 shadow-2xl backdrop-blur-sm">
-                <h2 class="text-white font-semibold mb-3 flex items-center gap-2">
-                    <svg class="icon text-sky-400" aria-hidden="true"><use href="/assets/icons.svg#circle-info"></use></svg>
-                    Wat kun je nu al doen?
-                </h2>
-                <ul class="space-y-2 text-sm text-slate-400 list-disc pl-5">
-                    <li>Lees in de <a href="/uitleg/" class="text-brand-400 underline underline-offset-2">uitleg</a> hoe de app werkt en hoe je hem straks installeert.</li>
-                    <li>Heb je een Android-telefoon? De app komt binnenkort in Google Play.</li>
-                    <li>Vragen? Mail naar <a href="mailto:matchtrackersolution@gmail.com" class="text-brand-400 underline underline-offset-2 break-all">matchtrackersolution@gmail.com</a>.</li>
+                <ul class="text-xs text-slate-300 space-y-1.5 mb-5 pl-1">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Geen start-advertentie bij het openen van de app</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Geen banner onderaan en geen advertenties bij rust of einde wedstrijd</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Eén keer betalen via je Google Play-account, geen abonnement</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Nieuwe telefoon? Gebruik "Aankoop herstellen" onder het tandwiel</li>
                 </ul>
+                <p id="billing-status" class="hidden text-xs text-amber-200 bg-amber-500/10 border border-amber-500/30 rounded-xl px-3 py-2 mb-3" role="status" aria-live="polite"></p>
+
+                <div class="flex gap-2">
+                    <button data-action="close-billing" class="flex-1 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold text-sm">
+                        Annuleren
+                    </button>
+                    <button id="billing-buy" data-action="purchase" disabled class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i class="fa-solid fa-lock text-xs"></i> <span id="billing-buy-label">Kopen</span>
+                    </button>
+                </div>
             </div>
-
-            <a href="/" class="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold border border-slate-700 transition-all active:scale-95">
-                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow-left"></use></svg>
-                Terug naar de homepage
-            </a>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="relative z-10 border-t border-slate-800/60 bg-slate-950 py-8 text-center">
-        <nav aria-label="Footer" class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm mb-4">
-            <a href="/" class="text-slate-400 hover:text-white transition-colors">Home</a>
-            <a href="/uitleg/" class="text-slate-400 hover:text-white transition-colors">Uitleg &amp; FAQ</a>
-            <a href="/privacy/" class="text-slate-400 hover:text-white transition-colors">Privacy</a>
-            <a href="/contact/" class="text-slate-400 hover:text-white transition-colors">Contact</a>
-        </nav>
-        <p class="text-slate-500 text-sm">&copy; <span data-year>2026</span> MatchTracker. Alle rechten voorbehouden.</p>
-    </footer>
+        <!-- DOELPUNT TOEVOEGEN MODAL (Pop-up) -->
+        <div id="goal-modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-5 shadow-2xl">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-700">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                            <i class="fa-solid fa-futbol text-sm"></i>
+                        </div>
+                        <h3 id="modal-goal-title" class="font-bold text-lg text-white">Doelpunt Vastleggen</h3>
+                    </div>
+                    <button data-action="close-goal" class="text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="mb-3">
+                    <span class="text-xs text-slate-400">Scoor voor team: </span>
+                    <span id="modal-goal-team-name" class="text-xs font-bold text-emerald-400">Thuis</span>
+                </div>
+
+                <!-- Speler Naam of Rugnummer Invoer -->
+                <div class="mb-5">
+                    <label for="goal-player-input" class="block text-xs text-slate-400 uppercase font-bold mb-1.5">Naam of Rugnummer Doelpuntenmaker:</label>
+                    <input type="text" id="goal-player-input" placeholder="Bijv. Nr. 9 of Sam de Vries" data-enter="save-goal" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3.5 py-2.5 text-white font-medium focus:outline-none focus:border-emerald-500">
+                </div>
+
+                <div class="flex gap-2">
+                    <button data-action="close-goal" class="flex-1 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold text-sm">
+                        Annuleren
+                    </button>
+                    <button data-action="save-goal" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg">
+                        Doelpunt +1
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- KAART TOEVOEGEN MODAL (Pop-up) -->
+        <div id="card-modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-5 shadow-2xl">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-700">
+                    <div class="flex items-center gap-2.5">
+                        <div id="modal-card-icon" class="w-5 h-7 bg-yellow-400 rounded shadow"></div>
+                        <h3 id="modal-card-title" class="font-bold text-lg text-white">Gele Kaart Toevoegen</h3>
+                    </div>
+                    <button data-action="close-card" class="text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Team Selectie -->
+                <div class="mb-4">
+                    <label class="block text-xs text-slate-400 uppercase font-bold mb-2">Kies Team:</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button type="button" id="modal-team1-btn" data-action="select-card-team" data-arg="1" class="py-2.5 px-3 rounded-xl font-bold text-sm border-2 border-emerald-500 bg-emerald-500/20 text-white truncate">
+                            Thuis
+                        </button>
+                        <button type="button" id="modal-team2-btn" data-action="select-card-team" data-arg="2" class="py-2.5 px-3 rounded-xl font-bold text-sm border border-slate-600 bg-slate-900 text-slate-300 truncate">
+                            Uit
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Speler Naam of Rugnummer Invoer -->
+                <div class="mb-5">
+                    <label for="player-input" class="block text-xs text-slate-400 uppercase font-bold mb-1.5">Naam of Rugnummer Speler:</label>
+                    <input type="text" id="player-input" placeholder="Bijv. Nr. 10 of Jan Jansen" data-enter="save-card" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3.5 py-2.5 text-white font-medium focus:outline-none focus:border-emerald-500">
+                </div>
+
+                <div class="flex gap-2">
+                    <button data-action="close-card" class="flex-1 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold text-sm">
+                        Annuleren
+                    </button>
+                    <button data-action="save-card" class="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg">
+                        Opslaan
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- WISSEL TOEVOEGEN MODAL (Pop-up) -->
+        <div id="substitution-modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-5 shadow-2xl">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-700">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-lg bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-sky-400">
+                            <i class="fa-solid fa-right-left text-sm"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Wissel Vastleggen</h3>
+                    </div>
+                    <button data-action="close-sub" class="text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Team Selectie -->
+                <div class="mb-4">
+                    <label class="block text-xs text-slate-400 uppercase font-bold mb-2">Kies Team:</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button type="button" id="sub-team1-btn" data-action="select-sub-team" data-arg="1" class="py-2.5 px-3 rounded-xl font-bold text-sm border-2 border-emerald-500 bg-emerald-500/20 text-white truncate">
+                            Thuis
+                        </button>
+                        <button type="button" id="sub-team2-btn" data-action="select-sub-team" data-arg="2" class="py-2.5 px-3 rounded-xl font-bold text-sm border border-slate-600 bg-slate-900 text-slate-300 truncate">
+                            Uit
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Speler Eruit & Erin -->
+                <div class="space-y-3 mb-5">
+                    <div>
+                        <label for="sub-out-input" class="block text-xs text-rose-400 uppercase font-bold mb-1">Speler Eruit (Naam of Nr):</label>
+                        <input type="text" id="sub-out-input" placeholder="Bijv. Nr. 7 of Mark" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3.5 py-2 text-white font-medium focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label for="sub-in-input" class="block text-xs text-emerald-400 uppercase font-bold mb-1">Speler Erin (Naam of Nr):</label>
+                        <input type="text" id="sub-in-input" placeholder="Bijv. Nr. 14 of Daan" data-enter="save-sub" class="w-full bg-slate-900 border border-slate-600 rounded-xl px-3.5 py-2 text-white font-medium focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+
+                <div class="flex gap-2">
+                    <button data-action="close-sub" class="flex-1 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold text-sm">
+                        Annuleren
+                    </button>
+                    <button data-action="save-sub" class="flex-1 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm shadow-lg">
+                        Wissel Opslaan
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEVESTIGINGS MODAL VOOR RESET (Geen browser-alert) -->
+        <div id="confirm-modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-[130] hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 border border-slate-600 rounded-2xl max-w-xs w-full p-5 shadow-2xl text-center">
+                <div class="w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto mb-3 text-xl">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 id="confirm-title" class="font-bold text-base text-white mb-1">Weet je het zeker?</h3>
+                <p id="confirm-desc" class="text-xs text-slate-300 mb-5">Deze actie kan niet ongedaan worden gemaakt.</p>
+                <div class="flex gap-2">
+                    <button data-action="close-confirm" class="flex-1 py-2 rounded-xl bg-slate-700 text-slate-200 font-semibold text-sm">
+                        Nee, terug
+                    </button>
+                    <button id="confirm-yes-btn" data-action="confirm-yes" class="flex-1 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-sm">
+                        Ja, reset
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NIEUWE WEDSTRIJD -->
+        <div id="newmatch-modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-5 shadow-2xl">
+                <div class="flex items-center gap-2.5 mb-3">
+                    <div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-white">Nieuwe wedstrijd starten?</h3>
+                </div>
+                <div id="newmatch-running-warning" class="hidden mb-3 bg-rose-950/40 border border-rose-500/50 text-rose-200 rounded-xl px-3 py-2 text-xs">
+                    <i class="fa-solid fa-triangle-exclamation mr-1 text-rose-400"></i>
+                    <b>Let op: de wedstrijd loopt nog.</b> De klok of rust wordt gestopt en het geplande eindsignaal geannuleerd.
+                </div>
+                <p id="newmatch-save-note" class="text-xs text-slate-300 mb-2">De huidige wedstrijd wordt bewaard onder Wedstrijden (tandwiel).</p>
+                <p class="text-xs text-slate-300 mb-1">Daarna gaan klok, periodes, rust, score, wedstrijdboek en teamnamen terug naar het begin.
+                    Sport, helften/kwarten, duur en instellingen blijven staan.</p>
+                <ul class="text-[11px] text-slate-400 mb-4 mt-2 space-y-0.5">
+                    <li><b class="text-slate-300">Score Reset:</b> alleen de stand op 0.</li>
+                    <li><b class="text-slate-300">Reset Tijd:</b> alleen de klok van deze periode op 00:00.</li>
+                    <li><b class="text-slate-300">Nieuwe wedstrijd:</b> alles opnieuw, huidige wedstrijd bewaard.</li>
+                </ul>
+                <div class="flex gap-2">
+                    <button data-action="close-new-match" class="flex-1 py-2 rounded-xl bg-slate-700 text-slate-200 font-semibold text-sm">Annuleren</button>
+                    <button id="newmatch-confirm-btn" data-action="confirm-new-match" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm">Nieuwe wedstrijd</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEDSTRIJDEN (HISTORIE) -->
+        <div id="history-modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-[106] hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-5 shadow-2xl">
+                <div class="flex justify-between items-center mb-3 pb-2 border-b border-slate-700">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <i class="fa-solid fa-clock-rotate-left text-emerald-400"></i>
+                        <h3 class="font-bold text-lg text-white">Wedstrijden</h3>
+                    </div>
+                    <button data-action="close-history" class="text-slate-400 hover:text-white" aria-label="Sluiten">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+                <p class="text-[11px] text-slate-400 mb-2"><span id="history-count">0 van max. 100</span>. Alleen op dit toestel; bij meer wordt de oudste automatisch verwijderd.</p>
+                <p id="history-empty" class="text-xs text-slate-500 text-center py-6 italic">Nog geen bewaarde wedstrijden.<br>Ze verschijnen hier na Einde Wedstrijd of Nieuwe wedstrijd.</p>
+                <div id="history-list" class="space-y-2"></div>
+            </div>
+        </div>
+
+        <!-- WEDSTRIJD-DETAIL (ALLEEN LEZEN) -->
+        <div id="detail-modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-[107] hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-5 shadow-2xl">
+                <div class="flex justify-between items-start gap-2 mb-2 pb-2 border-b border-slate-700">
+                    <div class="min-w-0">
+                        <h3 id="detail-title" class="font-bold text-base text-white break-words">Wedstrijd</h3>
+                        <p id="detail-meta" class="text-[11px] text-slate-400 mt-0.5"></p>
+                    </div>
+                    <button data-action="close-match" class="text-slate-400 hover:text-white shrink-0" aria-label="Sluiten">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+                <div id="detail-times" class="text-xs text-slate-300 grid grid-cols-2 gap-x-3 gap-y-0.5 mb-3"></div>
+                <div id="detail-log" class="bg-slate-950/90 rounded-xl p-3 border border-slate-800/90 mb-3"></div>
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <button data-action="share-match" data-arg="text" class="py-2 rounded-xl bg-sky-600/25 border border-sky-500/40 text-sky-200 font-semibold text-xs flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-share-nodes"></i>Delen als tekst
+                    </button>
+                    <button data-action="share-match" data-arg="csv" class="py-2 rounded-xl bg-sky-600/25 border border-sky-500/40 text-sky-200 font-semibold text-xs flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-file-csv"></i>Delen als CSV
+                    </button>
+                </div>
+                <button data-action="delete-match" class="w-full py-2 rounded-xl bg-rose-600/20 border border-rose-500/40 text-rose-300 font-semibold text-xs flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-trash-can"></i>Verwijderen
+                </button>
+            </div>
+        </div>
+
+        <!-- PRIVACYBELEID (OFFLINE, GEBUNDELDE TEKST) -->
+        <div id="policy-modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-[108] hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 border border-slate-600 rounded-2xl max-w-sm w-full p-5 shadow-2xl">
+                <div class="flex justify-between items-start gap-2 mb-2 pb-2 border-b border-slate-700">
+                    <div class="min-w-0">
+                        <h3 id="policy-title" class="font-bold text-base text-white">Privacybeleid</h3>
+                        <p id="policy-updated" class="text-[11px] text-slate-400 mt-0.5"></p>
+                        <p id="policy-contact" class="text-[11px] text-slate-400 break-all"></p>
+                    </div>
+                    <button data-action="close-policy" class="text-slate-400 hover:text-white shrink-0" aria-label="Sluiten">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+                <div id="policy-body" class="mb-3"></div>
+                <button id="policy-open-online" data-action="policy-online" class="hidden w-full py-2 rounded-xl bg-slate-700 text-slate-200 font-semibold text-xs">
+                    <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>Online versie openen
+                </button>
+            </div>
+        </div>
+
+        <!-- TOAST MELDING BALK BOVENAAN -->
+        <div id="toast-notification" class="fixed top-4 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-2xl border border-emerald-400 z-[120] hidden items-center gap-2">
+            <i class="fa-solid fa-circle-check"></i>
+            <span id="toast-text">Actie voltooid</span>
+        </div>
+
+    </div>
+
+    <!-- SCHERMVERGRENDELING: blokkeert alle aanraking; klok, score en log blijven zichtbaar -->
+    <div id="lock-overlay" class="hidden fixed inset-0 z-[200] bg-slate-950/25 flex items-end justify-center" style="touch-action: none; padding-bottom: calc(var(--ad-space) + 16px)">
+        <button id="unlock-btn" type="button" class="relative overflow-hidden flex items-center gap-2.5 px-5 py-4 rounded-2xl bg-slate-900/90 border border-slate-500 text-white font-bold text-sm shadow-2xl select-none" style="-webkit-touch-callout: none">
+            <i class="fa-solid fa-lock text-amber-300"></i>
+            <span>Houd ingedrukt om te ontgrendelen</span>
+            <span id="unlock-progress" class="absolute left-0 bottom-0 h-1 bg-emerald-400" style="width: 0%"></span>
+        </button>
+    </div>
+
 </body>
 </html>
