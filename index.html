@@ -3,134 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MatchTracker - De app voor scheidsrechters</title>
+    <title>MatchTracker - De professionele sport app</title>
+    
+    <!-- Tailwind CSS voor styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome voor iconen -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#151e2e',
+                            950: '#0a0f18',
+                        },
+                        brand: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #2563eb;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --success: #16a34a;
+        .hero-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(0,0,0,0) 70%);
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            pointer-events: none;
         }
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--primary);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            line-height: 1.6;
+        .btn-inactive { 
+            opacity: 0.3; 
+            filter: grayscale(100%); 
+            pointer-events: none;
         }
-        .container {
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            margin-top: 40px;
-        }
-        h1 { color: #38bdf8; font-size: 2.5rem; margin-bottom: 10px; }
-        .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 40px; }
-        
-        .cta-box {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid #334155;
-            margin-bottom: 40px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 14px 24px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            width: 80%;
-            margin: 10px 0;
-            transition: transform 0.2s;
-        }
-        .btn-android { background: var(--success); color: white; }
-        .btn-ios { background: var(--accent); color: white; }
-        .btn-inactive { opacity: 0.4; filter: grayscale(100%); }
-        
-        .ios-instructions {
-            display: none;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 15px;
-            background: rgba(255,255,255,0.05);
-            padding: 10px;
-            border-radius: 8px;
-        }
-        
-        .features {
-            text-align: left;
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid #334155;
-        }
-        .features h2 { font-size: 1.3rem; border-bottom: 1px solid #334155; padding-bottom: 10px; }
-        .features ul { padding-left: 20px; }
-        .features li { margin-bottom: 12px; color: var(--text-muted); }
-        .features strong { color: var(--text-main); }
     </style>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-300 font-sans antialiased overflow-x-hidden relative selection:bg-brand-500 selection:text-white">
 
-<div class="container">
-    <h1>MatchTracker</h1>
-    <div class="subtitle">De professionele app voor scheidsrechters en wedstrijdsecretarissen op het sportveld.</div>
+    <div class="hero-glow"></div>
 
-    <div class="cta-box">
-        <h2 id="device-title">Kies jouw platform</h2>
-        
-        <a href="https://play.google.com/store/apps/details?id=nl.jeroen.matchtracker" class="btn btn-android" id="btn-android">
-            Download via Google Play
-        </a>
-        
-        <a href="app.html" class="btn btn-ios" id="btn-ios">
-            Open iPhone Web-App
-        </a>
-        
-        <div id="ios-instructions" class="ios-instructions">
-            <strong>Installeren op iPhone:</strong><br>
-            1. Tik op 'Open iPhone Web-App'<br>
-            2. Tik onderin Safari op het 'Delen' icoontje (vierkant met pijltje omhoog)<br>
-            3. Kies 'Zet op beginscherm'
+    <!-- Navigatie -->
+    <nav class="relative z-10 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md sticky top-0">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <img src="icon-512_2.png" alt="MatchTracker Logo" class="w-9 h-9 rounded-xl border border-brand-500/40 shadow-lg shadow-brand-500/20">
+                    <span class="text-white font-bold text-xl tracking-wide">MatchTracker</span>
+                </div>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="features">
-        <h2>Functionaliteiten</h2>
-        <ul>
-            <li><strong>Slimme Wedstrijdklok:</strong> Ondersteuning voor 2 helften of 4 kwarten, standaard afgestemd op Voetbal (45 minuten) en Hockey (17.5 minuut)[cite: 1, 3].</li>
-            <li><strong>Altijd Actief (Achtergrond-bestendig):</strong> De klok loopt gegarandeerd door via Date.now() systeemtijd-ankers[cite: 1, 3]. Met de ingebouwde WakeLock-functie en de onhoorbare achtergrond audiostream (keep-alive) valt het scherm nooit ongewenst uit tijdens de wedstrijd[cite: 1, 3].</li>
-            <li><strong>Professioneel Wedstrijdboek:</strong> Een live logboek (Live Ticker) in tv-stijl dat met de exacte systeemtijd en wedstrijdminuut bijhoudt wanneer doelpuntenmakers scoren, spelers worden gewisseld en gele of rode kaarten vallen[cite: 1, 3].</li>
-            <li><strong>Signalen:</strong> Duidelijke trilfuncties en een drievoudig scheidsrechtersfluitje zodra de speeltijd verstreken is[cite: 1, 3].</li>
-        </ul>
-    </div>
-</div>
+    <!-- Hero Sectie -->
+    <main class="relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-sm font-medium text-slate-300 mb-6">
+                <span class="flex h-2 w-2 relative">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                </span>
+                Nu beschikbaar voor iOS & Android
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-6 leading-tight">
+                Focus op de wedstrijd,<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">wij doen de rest.</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                De meest complete en onverstoorbare wedstrijdklok en live-ticker voor op het sportveld. Speciaal ontworpen voor voetbal en hockey.
+            </p>
 
-<script>
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    const btnAndroid = document.getElementById('btn-android');
-    const btnIos = document.getElementById('btn-ios');
-    const iosInstructions = document.getElementById('ios-instructions');
-    const deviceTitle = document.getElementById('device-title');
+            <!-- Grote Feature Graphic Banner (zichtbaar op grotere schermen) -->
+            <img src="feature-graphic.jpg" alt="MatchTracker Feature" class="w-full max-w-3xl mx-auto rounded-3xl shadow-2xl shadow-brand-500/10 border border-slate-800 mb-12 hidden md:block">
 
-    if (/android/i.test(userAgent)) {
-        deviceTitle.innerText = "Download de Android App";
-        btnIos.classList.add('btn-inactive');
-    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        deviceTitle.innerText = "Start de iPhone Web-App";
-        btnAndroid.classList.add('btn-inactive');
-        iosInstructions.style.display = "block";
-    }
-</script>
+            <!-- Dynamische Download Sectie -->
+            <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 max-w-lg mx-auto shadow-2xl backdrop-blur-sm">
+                <h2 id="device-title" class="text-white font-semibold mb-4 text-lg">Kies jouw platform</h2>
+                
+                <div class="flex flex-col gap-3">
+                    <a href="https://play.google.com/store/apps/details?id=nl.jeroen.matchtracker" id="btn-android" class="flex items-center justify-center gap-3 w-full py-4 px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-brand-600 hover:from-emerald-500 hover:to-brand-500 text-white font-bold text-lg shadow-lg shadow-emerald-900/20 transition-all active:scale-95 border border-emerald-500/50">
+                        <i class="fa-brands fa-google-play text-xl"></i>
+                        Download via Google Play
+                    </a>
+                    
+                    <a href="app.html" id="btn-ios" class="flex items-center justify-center gap-3 w-full py-4 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-lg shadow-lg transition-all active:scale-95 border border-slate-700">
+                        <i class="fa-brands fa-apple text-xl"></i>
+                        Open iPhone Web-App
+                    </a>
+                </div>
 
+                <div id="ios-instructions" class="hidden mt-4 text-left bg-sky-900/20 border border-sky-800/50 rounded-xl p-4 text-sm text-sky-200">
+                    <strong class="flex items-center gap-2 text-sky-100 mb-2"><i class="fa-solid fa-circle-info"></i> Installeren op iPhone:</strong>
+                    <ol class="list-decimal list-inside space-y-1 ml-1 opacity-90">
+                        <li>Tik op de knop 'Open iPhone Web-App' hierboven</li>
+                        <li>Tik onderin Safari op het <strong>Delen</strong> icoontje <i class="fa-solid fa-arrow-up-from-bracket mx-1"></i></li>
+                        <li>Kies <strong>'Zet op beginscherm'</strong></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Doelgroepen Sectie (Spelers, Coaches, Scheidsrechters) -->
+        <div class="border-y border-slate-800/60 bg-slate-900/30 py-16">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white mb-4">Gemaakt voor iedereen op en langs het veld</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Scheidsrechters -->
+                    <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/60 transition-colors">
+                        <div class="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 mb-4 border border-amber-500/30">
+                            <i class="fa-solid fa-gavel text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Voor Scheidsrechters</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Nooit meer twijfel over de tijd. Met de onverstoorbare achtergrond-klok, trilfuncties en het ingebouwde fluitje behoud jij 100% de controle. Registreer kaarten en doelpunten in één tik.
+                        </p>
+                    </div>
+
+                    <!-- Coaches -->
+                    <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/60 transition-colors">
+                        <div class="w-12 h-12 rounded-full bg-sky-500/20 flex items-center justify-center text-sky-400 mb-4 border border-sky-500/30">
+                            <i class="fa-solid fa-clipboard-user text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Voor Coaches</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Houd direct het wedstrijdverloop bij. Gebruik het TV-stijl wedstrijdboek (live ticker) om exact bij te houden in welke minuut spelers gewisseld worden, wie scoort en hoe lang de rust nog duurt.
+                        </p>
+                    </div>
+
+                    <!-- Spelers -->
+                    <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/60 transition-colors">
+                        <div class="w-12 h-12 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400 mb-4 border border-brand-500/30">
+                            <i class="fa-solid fa-users text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Voor Spelers</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Een eerlijk en transparant spelverloop. Doordat de tijd en score professioneel worden vastgelegd, ontstaan er geen discussies meer over de gespeelde minuten of de exacte uitslag.
+                        </p>
+                    </div>
+
+                    <!-- Toeschouwers -->
+                    <div class="bg-slate-800/40 border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/60 transition-colors">
+                        <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 mb-4 border border-purple-500/30">
+                            <i class="fa-solid fa-people-group text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Voor Toeschouwers</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Volg de wedstrijd vanaf de zijlijn tot op de seconde nauwkeurig. Geen onduidelijkheid meer over de resterende speeltijd of wie nou eigenlijk die laatste goal maakte.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sporten Sectie (Voetbal & Hockey) -->
+        <div class="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-6">Naadloze integratie voor jouw favoriete sport</h2>
+                    <p class="text-slate-400 mb-6 leading-relaxed">
+                        MatchTracker past zich automatisch aan de regels van jouw sport aan. Of je nu op het gras staat of op het kunstgrasveld, de app staat direct goed ingesteld.
+                    </p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                                <i class="fa-solid fa-futbol text-xs"></i>
+                            </div>
+                            <div>
+                                <strong class="text-white block">Voetbal Modus</strong>
+                                <span class="text-slate-400 text-sm">Standaard ingesteld op 2 helften van 45 minuten. Registreer kaarten en doelpunten razendsnel.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-sky-500/20 flex items-center justify-center text-sky-400 shrink-0">
+                                <i class="fa-solid fa-hockey-puck text-xs"></i>
+                            </div>
+                            <div>
+                                <strong class="text-white block">Hockey Modus</strong>
+                                <span class="text-slate-400 text-sm">Perfect afgestemd op 4 kwarten van 17.5 minuut, met ondersteuning voor kwartpauzes.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
+                                <i class="fa-solid fa-shield-halved text-xs"></i>
+                            </div>
+                            <div>
+                                <strong class="text-white block">WakeLock & Achtergrondbeveiliging</strong>
+                                <span class="text-slate-400 text-sm">De klok stopt nóóit, zelfs niet als je je telefoon vergrendelt. Gebouwd op onbreekbare systeemtijd-ankers.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
+                                <i class="fa-solid fa-plus text-xs"></i>
+                            </div>
+                            <div>
+                                <strong class="text-white block">Meer sporten in de toekomst</strong>
+                                <span class="text-slate-400 text-sm">Pre-settings voor andere sporten (zoals rugby, korfbal en waterpolo) worden in de toekomst toegevoegd!</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Visuele 'Mockup' / Grafisch element gebaseerd op schermafbeelding -->
+                <div class="relative rounded-[2.5rem] bg-slate-900 border-[6px] border-slate-800 shadow-2xl shadow-brand-500/20 overflow-hidden max-w-sm mx-auto w-full flex flex-col">
+                    <!-- App Header -->
+                    <div class="bg-slate-800/90 backdrop-blur px-4 py-3 flex justify-between items-center border-b border-slate-700/70 shrink-0">
+                        <div class="flex items-center gap-2">
+                            <img src="icon-512_2.png" class="w-8 h-8 rounded-lg border border-brand-500/40" alt="Logo">
+                            <div class="leading-tight">
+                                <div class="text-white text-sm font-bold flex items-center gap-1">MatchTracker <span class="bg-amber-500/20 text-amber-400 text-[9px] font-extrabold px-1 rounded uppercase border border-amber-500/40">PRO</span></div>
+                                <div class="text-[9px] text-slate-400">Scheidsrechter & Score App</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- App Content -->
+                    <div class="p-4 flex flex-col gap-4 bg-slate-950 flex-1">
+                        <!-- Scoreboard -->
+                        <div class="bg-slate-800/90 rounded-2xl p-3.5 border border-slate-700/80">
+                            <div class="grid grid-cols-11 gap-2 items-center">
+                                <div class="col-span-5 bg-slate-900/90 rounded-xl p-2 border border-slate-800 flex flex-col items-center shadow-inner">
+                                    <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-wider mb-1">Thuis (Team 1)</span>
+                                    <span class="text-xs text-white font-bold mb-2">Thuis</span>
+                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-t-lg text-emerald-400 text-xs border border-slate-700"><i class="fa-solid fa-chevron-up"></i></div>
+                                    <div class="w-full bg-slate-950 text-center py-1 text-3xl font-bold text-white border-x border-slate-700 font-mono">2</div>
+                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-b-lg text-slate-500 text-xs border border-slate-700"><i class="fa-solid fa-chevron-down"></i></div>
+                                </div>
+                                <div class="col-span-1 text-center font-bold text-slate-500">:</div>
+                                <div class="col-span-5 bg-slate-900/90 rounded-xl p-2 border border-slate-800 flex flex-col items-center shadow-inner">
+                                    <span class="text-[9px] font-bold text-sky-400 uppercase tracking-wider mb-1">Uit (Team 2)</span>
+                                    <span class="text-xs text-white font-bold mb-2">Uit</span>
+                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-t-lg text-sky-400 text-xs border border-slate-700"><i class="fa-solid fa-chevron-up"></i></div>
+                                    <div class="w-full bg-slate-950 text-center py-1 text-3xl font-bold text-white border-x border-slate-700 font-mono">1</div>
+                                    <div class="w-full bg-slate-800 py-1 flex justify-center rounded-b-lg text-slate-500 text-xs border border-slate-700"><i class="fa-solid fa-chevron-down"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Log -->
+                        <div class="bg-slate-800/90 rounded-2xl p-3.5 border border-slate-700/80 flex-1">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[11px] font-bold text-white uppercase tracking-wider flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Wedstrijdboek</span>
+                                <span class="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">3 acties</span>
+                            </div>
+                            
+                            <!-- Action buttons -->
+                            <div class="grid grid-cols-3 gap-2 mb-3">
+                                <div class="bg-yellow-500/15 border border-yellow-500/40 text-yellow-400 text-[9px] font-bold py-1.5 rounded-lg text-center">+ Geel</div>
+                                <div class="bg-rose-500/15 border border-rose-500/40 text-rose-400 text-[9px] font-bold py-1.5 rounded-lg text-center">+ Rood</div>
+                                <div class="bg-sky-500/15 border border-sky-500/40 text-sky-400 text-[9px] font-bold py-1.5 rounded-lg text-center flex justify-center items-center gap-1"><i class="fa-solid fa-right-left text-[8px]"></i> Wissel</div>
+                            </div>
+
+                            <!-- Timeline Items -->
+                            <div class="space-y-2">
+                                <!-- Goal 3 -->
+                                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2 border-l-2 border-l-emerald-500 relative">
+                                    <div class="flex gap-2">
+                                        <div class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-1.5 py-1 rounded h-fit mt-0.5">31' GOAL</div>
+                                        <div class="flex-1">
+                                            <div class="text-[10px] text-emerald-400 font-bold mb-0.5">THUIS <span class="text-slate-300 ml-1">2 - 1</span></div>
+                                            <div class="text-[10px] text-slate-400">Doelpunt door Nr. 10</div>
+                                            <div class="text-[8px] text-slate-500 mt-1 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Tijdstip: 14:31:00 • 1e Helft (31:00)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Goal 2 -->
+                                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2 border-l-2 border-l-sky-500 relative">
+                                    <div class="flex gap-2">
+                                        <div class="bg-sky-500/20 text-sky-400 text-[10px] font-bold px-1.5 py-1 rounded h-fit mt-0.5">24' GOAL</div>
+                                        <div class="flex-1">
+                                            <div class="text-[10px] text-sky-400 font-bold mb-0.5">UIT <span class="text-slate-300 ml-1">1 - 1</span></div>
+                                            <div class="text-[10px] text-slate-400">Doelpunt door Nr. 7</div>
+                                            <div class="text-[8px] text-slate-500 mt-1 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Tijdstip: 14:24:12 • 1e Helft (24:12)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Goal 1 -->
+                                <div class="bg-slate-950 border border-slate-800 rounded-lg p-2 border-l-2 border-l-emerald-500 relative">
+                                    <div class="flex gap-2">
+                                        <div class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-1.5 py-1 rounded h-fit mt-0.5">12' GOAL</div>
+                                        <div class="flex-1">
+                                            <div class="text-[10px] text-emerald-400 font-bold mb-0.5">THUIS <span class="text-slate-300 ml-1">1 - 0</span></div>
+                                            <div class="text-[10px] text-slate-400">Doelpunt door Nr. 9</div>
+                                            <div class="text-[8px] text-slate-500 mt-1 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Tijdstip: 14:12:05 • 1e Helft (12:05)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/60 bg-slate-950 py-8 text-center mt-auto">
+        <p class="text-slate-500 text-sm">
+            &copy; <script>document.write(new Date().getFullYear())</script> MatchTracker. Alle rechten voorbehouden.
+        </p>
+    </footer>
+
+    <!-- Apparaat Detectie Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const btnAndroid = document.getElementById('btn-android');
+            const btnIos = document.getElementById('btn-ios');
+            const iosInstructions = document.getElementById('ios-instructions');
+            const deviceTitle = document.getElementById('device-title');
+
+            if (/android/i.test(userAgent)) {
+                // Gebruiker zit op Android
+                deviceTitle.innerText = "Download de Android App";
+                btnIos.classList.add('btn-inactive');
+                
+                // Extra accent op Android knop
+                btnAndroid.classList.add('ring-2', 'ring-emerald-500', 'ring-offset-2', 'ring-offset-slate-900');
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                // Gebruiker zit op iOS
+                deviceTitle.innerText = "Start de iPhone Web-App";
+                btnAndroid.classList.add('btn-inactive');
+                
+                // Wissel knop kleuren/accenten
+                btnIos.classList.replace('bg-slate-800', 'bg-gradient-to-r');
+                btnIos.classList.add('from-sky-600', 'to-blue-600', 'border-sky-500/50', 'ring-2', 'ring-sky-500', 'ring-offset-2', 'ring-offset-slate-900');
+                
+                // Toon Safari instructies
+                iosInstructions.classList.remove('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
