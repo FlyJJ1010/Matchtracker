@@ -13,4 +13,7 @@ Wat de webbuild doet, zonder de app-code (`src/`) aan te passen:
   web-varianten. De app kiest dan zelf haar browserpad (localStorage, WebAudio, delen/download).
 - `web-platform.js`: `window.MT_PLATFORM = "web"`, geluid ontgrendelen bij een tik (iOS),
   "Scherm aan houden" via de Wake Lock API (schakelaar verborgen als de browser dat niet kan).
+- Reclame/aankoop verborgen (`WEB_HIDDEN_IDS` in `vite.web.config.mjs`): PRO-badge,
+  "Reclame verwijderen"-balk, aankoopmeldingen, koopscherm, tandwiel-items en de advertentiestatus.
+  Verandert de app-HTML zodat een element niet meer gevonden wordt, dan stopt de build met een melding.
 - Privacybeleid-knop wijst naar https://match-tracker.nl/privacy/.

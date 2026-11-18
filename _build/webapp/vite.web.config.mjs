@@ -21,6 +21,29 @@ function mustReplace(text, find, replacement, what) {
   return out;
 }
 
+// Reclame- en aankoopelementen die op het web geen betekenis hebben. De app-code zoekt ze op
+// (renderMonetization), dus ze blijven in de HTML maar worden nooit getoond en nemen geen ruimte in.
+const WEB_HIDDEN_IDS = [
+  'pro-badge', // PRO-badge in de kop
+  'upgrade-banner', // "Reclamevrij fluiten? Reclame verwijderen"
+  'billing-notice', // aankoopmeldingen
+  'settings-remove-ads', // tandwiel: Reclame verwijderen
+  'settings-restore', // tandwiel: Aankoop herstellen
+  'settings-privacy', // tandwiel: toestemming advertenties
+  'settings-test-ads', // label "Testadvertenties"
+  'billing-modal', // koopscherm Google Play
+];
+
+function hideMonetization(html) {
+  for (const id of WEB_HIDDEN_IDS) {
+    html = mustReplace(html, `id="${id}"`, `id="${id}" data-mt-web-hidden`, id);
+  }
+  // "Status: Gratis versie (met reclame)" onder het scorebord, inclusief de scheidingslijn.
+  html = mustReplace(html, /(<!-- Advertentie-status -->\s*<div) /, '$1 data-mt-web-hidden ', 'advertentie-status');
+  return mustReplace(html, '</head>',
+    '    <style>[data-mt-web-hidden]{display:none!important}</style>\n</head>', '</head>');
+}
+
 function webPlatformPlugin() {
   return {
     name: 'matchtracker-web-platform',
@@ -38,6 +61,7 @@ function webPlatformPlugin() {
     transformIndexHtml: {
       order: 'pre',
       handler(html) {
+        html = hideMonetization(html);
         return mustReplace(html, '<script type="module" src="/src/main.js"></script>',
           '<script>window.MT_PLATFORM = "web";</script>\n' +
           `    <script type="module" src="${PLATFORM_ENTRY}"></script>\n` +
