@@ -1,7 +1,7 @@
 // MatchTracker service worker (scope /app/). Gegenereerd door _build/webapp/vite.web.config.mjs.
 // Bewaart de hele app offline, zodat hij zonder bereik start. Elke nieuwe build krijgt een
 // nieuw versienummer: dan wordt alles opnieuw opgehaald en de oude cache opgeruimd.
-const VERSION = '1.0.0-c112786a09';
+const VERSION = '1.0.0-7eabb467f7';
 const CACHE = `matchtracker-app-${VERSION}`;
 const PRECACHE = [
   "/app/assets/chakra-petch-latin-600-normal-DVQm9bgb.woff2",
@@ -16,8 +16,8 @@ const PRECACHE = [
   "/app/assets/fa-regular-400-BjRzuEpd.woff2",
   "/app/assets/fa-solid-900-CTAAxXor.woff2",
   "/app/assets/fa-v4compatibility-C9RhG_FT.woff2",
-  "/app/assets/index-BI1pC8up.js",
   "/app/assets/index-CXIcIWdd.css",
+  "/app/assets/index-CnTe3D0B.js",
   "/app/assets/inter-cyrillic-400-normal-obahsSVq.woff2",
   "/app/assets/inter-cyrillic-500-normal-BasfLYem.woff2",
   "/app/assets/inter-cyrillic-600-normal-CWCymEST.woff2",
@@ -46,7 +46,7 @@ const PRECACHE = [
   "/app/assets/inter-vietnamese-500-normal-DOriooB6.woff2",
   "/app/assets/inter-vietnamese-600-normal-Cc8MFFhd.woff2",
   "/app/assets/inter-vietnamese-700-normal-DlLaEgI2.woff2",
-  "/app/assets/web-kTXUt65x.js",
+  "/app/assets/web-gfzag7qs.js",
   "/app/",
   "/app/manifest.json",
   "/favicon.ico",
@@ -79,6 +79,8 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+  // Andere domeinen (o.a. advertenties van Google AdSense) nooit onderscheppen of cachen:
+  // die gaan rechtstreeks naar internet en mislukken offline, waarna de advertentieblokken dicht blijven.
   if (url.origin !== self.location.origin) return;
 
   // De app zelf (/app/ of /app/index.html): altijd direct uit de cache, ook zonder bereik.

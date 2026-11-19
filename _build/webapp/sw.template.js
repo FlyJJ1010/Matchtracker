@@ -27,6 +27,8 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+  // Andere domeinen (o.a. advertenties van Google AdSense) nooit onderscheppen of cachen:
+  // die gaan rechtstreeks naar internet en mislukken offline, waarna de advertentieblokken dicht blijven.
   if (url.origin !== self.location.origin) return;
 
   // De app zelf (/app/ of /app/index.html): altijd direct uit de cache, ook zonder bereik.

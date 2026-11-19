@@ -17,6 +17,14 @@ Wat de webbuild doet, zonder de app-code (`src/`) aan te passen:
   "Reclame verwijderen"-balk, aankoopmeldingen, koopscherm, tandwiel-items en de advertentiestatus.
   Verandert de app-HTML zodat een element niet meer gevonden wordt, dan stopt de build met een melding.
 - Privacybeleid-knop wijst naar https://match-tracker.nl/privacy/.
+- Advertenties (Google AdSense, `web-ads.js`): instellingen in `MT_ADS` bovenin `vite.web.config.mjs`
+  (komt als `window.MT_ADS` in de pagina). Banner 320x50 als vaste balk onderin via `--ad-space`;
+  rustblok 300x250 onderaan de inhoud, alleen in een rust waarvoor `isEligibleBreak(state)` geldt.
+  Elke advertentie wordt één keer aangevraagd; geen advertentie, offline of schermslot: blok dicht/verborgen.
+  Beide slots leeg: geen script en geen container. De build stopt als `main-scroll-area`, `time-section`,
+  `break-active-bar`, `lock-overlay` of `isEligibleBreak` niet meer in de app staan.
+- **Advertenties aanzetten:** zet `ADS_ENABLED` in `vite.web.config.mjs` op `true`.
+  Bouw daarna opnieuw (`node _build/webapp/build-webapp.mjs`), commit en push.
 - PWA: `app/manifest.json` (standalone, themakleur, iconen) en `app/sw.js` (scope `/app/`),
   gemaakt uit `sw.template.js`. De service worker bewaart de hele app offline. Het versienummer
   is een vingerafdruk van alle bestanden: na elke nieuwe build komt de update vanzelf door

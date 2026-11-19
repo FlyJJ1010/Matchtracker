@@ -4,7 +4,7 @@
 // De app-broncode (src/) wordt niet aangepast; alles hier is een laag eromheen.
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join, relative } from 'node:path';
-import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -15,11 +15,38 @@ const pkg = JSON.parse(readFileSync(resolve(appRoot, 'package.json'), 'utf8'));
 const WEB_PRIVACY_URL = 'https://match-tracker.nl/privacy/';
 const PLATFORM_ENTRY = '/@mt-web/web-platform.js';
 
+// Advertenties in de webversie (Google AdSense), uitgevoerd door web-ads.js.
+// ADS_ENABLED = false: slots leeg in window.MT_ADS -> geen script, geen container, geen verzoeken.
+const ADS_ENABLED = false;
+const AD_SLOTS = {
+  banner: '9961331988', // 320x50, vaste balk onderin
+  break: '6039940831', // 300x250, alleen in de rust (isEligibleBreak)
+};
+const MT_ADS = {
+  client: 'ca-pub-9906906182484323',
+  slotBanner: ADS_ENABLED ? AD_SLOTS.banner : '',
+  slotBreak: ADS_ENABLED ? AD_SLOTS.break : '',
+};
+
 /** Vervangt een stuk tekst en stopt de build als het niet (meer) gevonden wordt. */
 function mustReplace(text, find, replacement, what) {
   const out = text.replace(find, replacement);
   if (out === text) throw new Error(`Webbuild: "${what}" niet gevonden in de app. Is de app-code veranderd?`);
   return out;
+}
+
+/** Stopt de build als iets waar web-ads.js op leunt niet (meer) in de app staat. */
+function mustContain(text, find, what) {
+  const found = typeof find === 'string' ? text.includes(find) : find.test(text);
+  if (!found) throw new Error(`Webbuild (advertenties): "${what}" niet gevonden in de app. Is de app-code veranderd?`);
+}
+
+// web-ads.js gebruikt deze elementen en isEligibleBreak uit core/adPolicy.js.
+const AD_ELEMENT_IDS = ['main-scroll-area', 'time-section', 'break-active-bar', 'lock-overlay'];
+function checkAdHooks(html) {
+  for (const id of AD_ELEMENT_IDS) mustContain(html, `id="${id}"`, `id="${id}"`);
+  const policy = readFileSync(resolve(appRoot, 'src/core/adPolicy.js'), 'utf8');
+  mustContain(policy, /export\s+function\s+isEligibleBreak\s*\(/, 'isEligibleBreak in src/core/adPolicy.js');
 }
 
 // Reclame- en aankoopelementen die op het web geen betekenis hebben. De app-code zoekt ze op
@@ -62,9 +89,11 @@ function webPlatformPlugin() {
     transformIndexHtml: {
       order: 'pre',
       handler(html) {
+        checkAdHooks(html);
         html = hideMonetization(html);
         return mustReplace(html, '<script type="module" src="/src/main.js"></script>',
           '<script>window.MT_PLATFORM = "web";</script>\n' +
+          `    <script>window.MT_ADS = ${JSON.stringify(MT_ADS)};</script>\n` +
           `    <script type="module" src="${PLATFORM_ENTRY}"></script>\n` +
           '    <script type="module" src="/src/main.js"></script>', 'main.js-script');
       },
@@ -119,10 +148,17 @@ function walk(dir) {
 
 function pwaPlugin() {
   let outDir;
+  let failed = false; // mislukte build: closeBundle mag de echte foutmelding niet overschrijven
   return {
     name: 'matchtracker-pwa',
     configResolved(config) {
       outDir = config.build.outDir;
+    },
+    buildEnd(error) {
+      if (error) failed = true;
+    },
+    renderError() {
+      failed = true;
     },
     // Na de verwerking door Vite, zodat deze absolute site-paden ongewijzigd blijven.
     transformIndexHtml: {
@@ -130,6 +166,7 @@ function pwaPlugin() {
       handler: (html) => mustReplace(html, '</head>', `${PWA_HEAD}</head>`, '</head>'),
     },
     closeBundle() {
+      if (failed || !existsSync(join(outDir, 'index.html'))) return;
       writeFileSync(join(outDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
       // Alles wat de app nodig heeft om offline te starten. .ttf/.woff zijn reserve-formaten
       // die moderne browsers niet laden (zij gebruiken .woff2).
