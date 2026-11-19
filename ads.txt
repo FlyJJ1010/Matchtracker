@@ -1,2 +1,1 @@
-# ads.txt voor match-tracker.nl
-# Nog leeg: wordt ingevuld zodra advertenties (AdSense) worden ingeschakeld.
+google.com, pub-9906906182484323, DIRECT, f08c47fec0942fa0

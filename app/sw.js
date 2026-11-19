@@ -1,7 +1,7 @@
 // MatchTracker service worker (scope /app/). Gegenereerd door _build/webapp/vite.web.config.mjs.
 // Bewaart de hele app offline, zodat hij zonder bereik start. Elke nieuwe build krijgt een
 // nieuw versienummer: dan wordt alles opnieuw opgehaald en de oude cache opgeruimd.
-const VERSION = '1.0.0-61ed074df6';
+const VERSION = '1.0.0-c112786a09';
 const CACHE = `matchtracker-app-${VERSION}`;
 const PRECACHE = [
   "/app/assets/chakra-petch-latin-600-normal-DVQm9bgb.woff2",

@@ -97,6 +97,7 @@ const manifest = {
 };
 
 const PWA_HEAD = `
+    <meta name="google-adsense-account" content="ca-pub-9906906182484323">
     <meta name="description" content="MatchTracker: wedstrijdklok en scoreapp voor scheidsrechters (voetbal en hockey). Werkt ook zonder internet.">
     <link rel="canonical" href="https://match-tracker.nl/app/">
     <link rel="manifest" href="/app/manifest.json">
