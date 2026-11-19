@@ -17,14 +17,14 @@ Wat de webbuild doet, zonder de app-code (`src/`) aan te passen:
   "Reclame verwijderen"-balk, aankoopmeldingen, koopscherm, tandwiel-items en de advertentiestatus.
   Verandert de app-HTML zodat een element niet meer gevonden wordt, dan stopt de build met een melding.
 - Privacybeleid-knop wijst naar https://match-tracker.nl/privacy/.
-- Advertenties (Google AdSense, `web-ads.js`): instellingen in `MT_ADS` bovenin `vite.web.config.mjs`
-  (komt als `window.MT_ADS` in de pagina). Banner 320x50 als vaste balk onderin via `--ad-space`;
+- Advertenties (Google AdSense, `web-ads.js`): schakelaar en slotnummers in `_build/ads.config.mjs`
+  (gedeeld met de website); `vite.web.config.mjs` maakt daar `MT_ADS` van (komt als `window.MT_ADS` in de pagina). Banner 320x50 als vaste balk onderin via `--ad-space`;
   rustblok 300x250 onderaan de inhoud, alleen in een rust waarvoor `isEligibleBreak(state)` geldt.
   Elke advertentie wordt één keer aangevraagd; geen advertentie, offline of schermslot: blok dicht/verborgen.
   Beide slots leeg: geen script en geen container. De build stopt als `main-scroll-area`, `time-section`,
   `break-active-bar`, `lock-overlay` of `isEligibleBreak` niet meer in de app staan.
-- **Advertenties aanzetten:** zet `ADS_ENABLED` in `vite.web.config.mjs` op `true`.
-  Bouw daarna opnieuw (`node _build/webapp/build-webapp.mjs`), commit en push.
+- **Advertenties aanzetten:** zet `ADS_ENABLED` in `_build/ads.config.mjs` op `true`. Dat geldt ook voor
+  de homepage en Uitleg & FAQ. Bouw daarna site én webapp opnieuw (zie `_build/README.md`), commit en push.
 - Installatiemelding (`web-install-hint.js`): alleen in Safari op iPhone/iPad, niet in de geïnstalleerde app
   (`navigator.standalone` / `display-mode: standalone`) en niet tijdens een lopende wedstrijd. Eén keer:
   sluiten wordt onthouden in localStorage (`mt_web_install_hint_closed`).

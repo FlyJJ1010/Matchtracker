@@ -16,14 +16,11 @@ const WEB_PRIVACY_URL = 'https://match-tracker.nl/privacy/';
 const PLATFORM_ENTRY = '/@mt-web/web-platform.js';
 
 // Advertenties in de webversie (Google AdSense), uitgevoerd door web-ads.js.
+// De schakelaar ADS_ENABLED staat in _build/ads.config.mjs (geldt ook voor de website).
 // ADS_ENABLED = false: slots leeg in window.MT_ADS -> geen script, geen container, geen verzoeken.
-const ADS_ENABLED = false;
-const AD_SLOTS = {
-  banner: '9961331988', // 320x50, vaste balk onderin
-  break: '6039940831', // 300x250, alleen in de rust (isEligibleBreak)
-};
+import { ADS_ENABLED, ADSENSE_CLIENT, AD_SLOTS } from '../ads.config.mjs';
 const MT_ADS = {
-  client: 'ca-pub-9906906182484323',
+  client: ADSENSE_CLIENT,
   slotBanner: ADS_ENABLED ? AD_SLOTS.banner : '',
   slotBreak: ADS_ENABLED ? AD_SLOTS.break : '',
 };
