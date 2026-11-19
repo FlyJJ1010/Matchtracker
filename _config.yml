@@ -5,3 +5,7 @@ exclude:
   - tailwind.config.js
   - node_modules
   - app-oud.html
+
+# Wel publiceren: mappen met een punt slaat Jekyll standaard over (Android App Links).
+include:
+  - .well-known

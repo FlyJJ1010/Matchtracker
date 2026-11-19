@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "nl.matchtracker.app",
+    "sha256_cert_fingerprints": ["F5:81:97:A7:21:92:30:FA:31:0D:3F:F2:DB:74:BD:A1:25:29:EF:AC:E2:6B:4E:A3:73:52:27:CF:D6:F5:AE:28"]
+  }
+}]
