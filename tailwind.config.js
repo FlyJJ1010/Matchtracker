@@ -6,6 +6,7 @@ module.exports = {
     './uitleg/**/*.html',
     './privacy/**/*.html',
     './contact/**/*.html',
+    './start/**/*.html',
     './assets/js/**/*.js',
   ],
   theme: {

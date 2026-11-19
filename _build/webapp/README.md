@@ -25,6 +25,9 @@ Wat de webbuild doet, zonder de app-code (`src/`) aan te passen:
   `break-active-bar`, `lock-overlay` of `isEligibleBreak` niet meer in de app staan.
 - **Advertenties aanzetten:** zet `ADS_ENABLED` in `vite.web.config.mjs` op `true`.
   Bouw daarna opnieuw (`node _build/webapp/build-webapp.mjs`), commit en push.
+- Installatiemelding (`web-install-hint.js`): alleen in Safari op iPhone/iPad, niet in de geïnstalleerde app
+  (`navigator.standalone` / `display-mode: standalone`) en niet tijdens een lopende wedstrijd. Eén keer:
+  sluiten wordt onthouden in localStorage (`mt_web_install_hint_closed`).
 - PWA: `app/manifest.json` (standalone, themakleur, iconen) en `app/sw.js` (scope `/app/`),
   gemaakt uit `sw.template.js`. De service worker bewaart de hele app offline. Het versienummer
   is een vingerafdruk van alle bestanden: na elke nieuwe build komt de update vanzelf door

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-9906906182484323">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aan de slag met MatchTracker</title>
+    <meta name="description" content="Open MatchTracker, de wedstrijdklok en scoreapp voor scheidsrechters en coaches in voetbal en hockey.">
+    <!-- Landingspagina voor de QR-code op posters: niet in zoekmachines en niet in sitemap.xml. -->
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#0a0f18">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <!-- Bewust zonder defer: zet het apparaat op <html> voordat de pagina getekend wordt (geen verspringen). -->
+    <script src="/assets/js/site.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-300 font-sans antialiased overflow-x-hidden relative min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <div class="hero-glow"></div>
+
+    <!-- Navigatie -->
+    <nav class="relative z-10 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md sticky top-0">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex items-center gap-3" aria-label="MatchTracker – naar de homepage">
+                    <div class="w-9 h-9 rounded-xl bg-slate-900 border border-brand-500/40 shadow-lg shadow-brand-500/20 flex items-center justify-center relative shrink-0 overflow-hidden">
+                        <div class="absolute w-[22px] h-[22px] rounded-full border-[2.5px] border-brand-500"></div>
+                        <div class="absolute top-[2px] w-2 h-1 bg-brand-500 rounded-sm"></div>
+                        <div class="absolute top-[6px] right-[5px] w-1.5 h-1.5 bg-brand-500 rounded-sm rotate-45"></div>
+                        <span class="text-white text-[10px] font-black font-mono tracking-tighter mt-0.5 relative z-10">1:0</span>
+                    </div>
+                    <span class="text-white font-bold text-xl tracking-wide">MatchTracker</span>
+                </a>
+                <div class="flex items-center gap-1 text-sm font-medium">
+                    <a href="/uitleg/" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Uitleg</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 flex-1">
+        <div class="max-w-xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-12 text-center">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3 leading-tight">
+                Wedstrijdklok en score<br class="sm:hidden"> <span class="whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-sky-400">in je broekzak</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-400 mb-8 leading-relaxed">
+                Houd speeltijd, stand, kaarten en wissels bij. Voor voetbal en hockey, gratis en zonder account.
+            </p>
+
+            <!-- ===== iPhone / iPad ===== -->
+            <div data-show="ios">
+                <a href="/app/" class="flex items-center justify-center gap-3 w-full py-5 px-4 rounded-2xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold text-xl shadow-lg shadow-sky-900/30 border border-sky-500/50 transition-all active:scale-95">
+                    <svg class="icon text-2xl" aria-hidden="true"><use href="/assets/icons.svg#apple"></use></svg>
+                    Open MatchTracker
+                </a>
+
+                <div class="mt-5 text-left bg-sky-900/20 border border-sky-800/50 rounded-2xl p-4 sm:p-5 text-sky-200">
+                    <strong class="flex items-center gap-2 text-sky-100 mb-3 text-base">
+                        <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#square-plus"></use></svg>
+                        Zet hem op je beginscherm
+                    </strong>
+                    <ol class="list-decimal list-inside space-y-2 ml-1 text-[15px]">
+                        <li>Tik hierboven op <strong class="text-white">Open MatchTracker</strong> (in <strong class="text-white">Safari</strong>)</li>
+                        <li>Tik op <strong class="text-white">Delen</strong> <svg class="icon mx-1" aria-hidden="true"><use href="/assets/icons.svg#arrow-up-from-bracket"></use></svg></li>
+                        <li>Kies <strong class="text-white">Zet op beginscherm</strong> <svg class="icon mx-1" aria-hidden="true"><use href="/assets/icons.svg#square-plus"></use></svg></li>
+                        <li>Open MatchTracker voortaan via het icoon op je beginscherm</li>
+                    </ol>
+                    <p class="mt-4 text-sm leading-relaxed">
+                        <strong class="text-sky-100">Waarom?</strong> Zo blijven je wedstrijden betrouwbaar bewaard. In een gewoon Safari-tabblad kan iOS je opgeslagen wedstrijden wissen als je de site een tijdje niet gebruikt.
+                        <a href="/uitleg/#iphone" class="underline underline-offset-2 text-sky-100">Meer uitleg</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- ===== Android ===== -->
+            <div data-show="android">
+                <!-- PLAY_LIVE (site.js): Play-knop als hoofdknop -->
+                <a data-play="live" href="https://play.google.com/store/apps/details?id=nl.matchtracker.app" class="flex items-center justify-center gap-3 w-full py-5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-brand-600 hover:from-emerald-500 hover:to-brand-500 text-white font-bold text-xl shadow-lg shadow-emerald-900/30 border border-emerald-500/50 transition-all active:scale-95">
+                    <svg class="icon text-2xl" aria-hidden="true"><use href="/assets/icons.svg#google-play"></use></svg>
+                    Download in Google Play
+                </a>
+                <a data-play="live" href="/app/" class="mt-4 inline-block text-sm text-slate-400 underline underline-offset-2 hover:text-white">
+                    Liever direct in de browser? Open de webapp
+                </a>
+
+                <!-- Nog niet in Play: webapp als hoofdknop -->
+                <a data-play="soon" href="/app/" class="flex items-center justify-center gap-3 w-full py-5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-brand-600 hover:from-emerald-500 hover:to-brand-500 text-white font-bold text-xl shadow-lg shadow-emerald-900/30 border border-emerald-500/50 transition-all active:scale-95">
+                    <svg class="icon text-2xl" aria-hidden="true"><use href="/assets/icons.svg#mobile-screen"></use></svg>
+                    Open MatchTracker
+                </a>
+                <p data-play="soon" class="mt-4 text-sm text-slate-400 leading-relaxed">
+                    Werkt direct in je browser. De Android-app komt binnenkort in Google Play.
+                </p>
+            </div>
+
+            <!-- ===== Computer (ook zonder JavaScript) ===== -->
+            <div data-show="desktop">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 flex flex-col">
+                        <h2 class="flex items-center gap-2 text-white font-semibold text-lg mb-2">
+                            <svg class="icon text-emerald-400" aria-hidden="true"><use href="/assets/icons.svg#google-play"></use></svg>
+                            Android
+                        </h2>
+                        <p data-play="live" class="text-sm text-slate-400 mb-4 flex-1">Installeer de app op je Android-telefoon via Google Play.</p>
+                        <a data-play="live" href="https://play.google.com/store/apps/details?id=nl.matchtracker.app" class="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-brand-600 text-white font-bold border border-emerald-500/50 transition-all active:scale-95">
+                            Download in Google Play
+                        </a>
+                        <p data-play="soon" class="text-sm text-slate-400 mb-4 flex-1">Komt binnenkort in Google Play. Tot die tijd werkt de webapp ook op Android.</p>
+                        <div data-play="soon" aria-disabled="true" class="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-slate-800 text-slate-400 text-sm font-bold whitespace-nowrap border border-slate-700 cursor-default select-none">
+                            Binnenkort op Google Play
+                        </div>
+                    </div>
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 flex flex-col">
+                        <h2 class="flex items-center gap-2 text-white font-semibold text-lg mb-2">
+                            <svg class="icon text-sky-400" aria-hidden="true"><use href="/assets/icons.svg#apple"></use></svg>
+                            iPhone, iPad en browser
+                        </h2>
+                        <p class="text-sm text-slate-400 mb-4 flex-1">Gebruik MatchTracker als webapp. Op iPhone of iPad zet je hem via Safari op je beginscherm.</p>
+                        <a href="/app/" class="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold border border-sky-500/50 transition-all active:scale-95">
+                            Open de webapp
+                        </a>
+                    </div>
+                </div>
+                <p class="mt-6 text-sm text-slate-500">
+                    Tip: open deze pagina op je telefoon, dan zie je direct de juiste knop.
+                </p>
+            </div>
+
+            <p class="mt-10 text-sm text-slate-500">
+                <a href="/" class="underline underline-offset-2 hover:text-white">Meer over MatchTracker</a>
+                <span class="mx-2" aria-hidden="true">·</span>
+                <a href="/uitleg/" class="underline underline-offset-2 hover:text-white">Uitleg &amp; FAQ</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-slate-800/60 bg-slate-950 py-8 text-center">
+        <nav aria-label="Footer" class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm mb-4">
+            <a href="/" class="text-slate-400 hover:text-white transition-colors">Home</a>
+            <a href="/uitleg/" class="text-slate-400 hover:text-white transition-colors">Uitleg &amp; FAQ</a>
+            <a href="/privacy/" class="text-slate-400 hover:text-white transition-colors">Privacy</a>
+            <a href="/contact/" class="text-slate-400 hover:text-white transition-colors">Contact</a>
+        </nav>
+        <p class="text-slate-500 text-sm">&copy; <span data-year>2026</span> MatchTracker. Alle rechten voorbehouden.</p>
+    </footer>
+</body>
+</html>

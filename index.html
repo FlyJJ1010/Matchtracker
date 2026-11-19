@@ -111,7 +111,8 @@
                     Voor Android komt MatchTracker in Google Play. Op iPhone en iPad gebruik je MatchTracker als webapp via Safari, zonder App Store.
                 </p>
 
-                <div id="ios-instructions" class="mt-4 text-left bg-sky-900/20 border border-sky-800/50 rounded-xl p-4 text-sm text-sky-200">
+                <!-- Alleen zichtbaar op iPhone/iPad: site.js haalt 'hidden' weg -->
+                <div id="ios-instructions" class="hidden mt-4 text-left bg-sky-900/20 border border-sky-800/50 rounded-xl p-4 text-sm text-sky-200">
                     <strong class="flex items-center gap-2 text-sky-100 mb-2">
                         <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#circle-info"></use></svg>
                         Installeren op iPhone of iPad

@@ -3,8 +3,10 @@
 //  2. Geluid ontgrendelen bij een tik (iOS staat WebAudio pas toe na een aanraking).
 //  3. "Scherm aan houden" via de Wake Lock API; schakelaar verborgen als de browser dat niet kan.
 //  4. Advertenties (AdSense): zie web-ads.js.
+//  5. Eenmalige melding 'Zet op beginscherm' in Safari op iPhone/iPad: zie web-install-hint.js.
 import { runtime } from 'mt-app/src/state.js';
 import './web-ads.js';
+import './web-install-hint.js';
 
 window.MT_PLATFORM = 'web';
 
