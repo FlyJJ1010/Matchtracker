@@ -12,9 +12,8 @@
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="stylesheet" href="/assets/css/site.css">
-    <!-- Bewust zonder defer: zet het apparaat op <html> voordat de pagina getekend wordt (geen verspringen). -->
-    <script src="/assets/js/site.js"></script>
+    <link rel="stylesheet" href="/assets/css/site.css?v=4223a1dc36">
+    <script src="/assets/js/site.js?v=acc35933c6" defer></script>
 </head>
 <body class="bg-slate-950 text-slate-300 font-sans antialiased overflow-x-hidden relative min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
@@ -49,67 +48,106 @@
                 Houd speeltijd, stand, kaarten en wissels bij. Voor voetbal en hockey, gratis en zonder account.
             </p>
 
-            <!-- ===== iPhone / iPad ===== -->
-            <div data-show="ios">
-                <a href="/app/" class="flex items-center justify-center gap-3 w-full py-5 px-4 rounded-2xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold text-xl shadow-lg shadow-sky-900/30 border border-sky-500/50 transition-all active:scale-95">
-                    <svg class="icon text-2xl" aria-hidden="true"><use href="/assets/icons.svg#apple"></use></svg>
+            <!--
+                Veilige standaard: zonder (werkend) script en zelfs met verouderde CSS is alleen de neutrale knop
+                zichtbaar. Alle varianten hebben het hidden-attribuut; site.js toont alleen de juiste variant en
+                verbergt daarna de neutrale knop. Elementen met hidden krijgen bewust geen display-klasse
+                (zoals flex), omdat die het hidden-attribuut zou overrulen.
+            -->
+            <div id="start-choice">
+
+            <!-- ===== Standaard / zonder JavaScript ===== -->
+            <div data-variant="default">
+                <a href="/app/" class="flex items-center justify-center gap-3 w-full min-h-[64px] py-4 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-brand-600 text-white font-bold text-xl shadow-lg border border-emerald-500/50 transition-all active:scale-95">
                     Open MatchTracker
                 </a>
-
-                <div class="mt-5 text-left bg-sky-900/20 border border-sky-800/50 rounded-2xl p-4 sm:p-5 text-sky-200">
-                    <strong class="flex items-center gap-2 text-sky-100 mb-3 text-base">
-                        <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#square-plus"></use></svg>
-                        Zet hem op je beginscherm
-                    </strong>
-                    <ol class="list-decimal list-inside space-y-2 ml-1 text-[15px]">
-                        <li>Tik hierboven op <strong class="text-white">Open MatchTracker</strong> (in <strong class="text-white">Safari</strong>)</li>
-                        <li>Tik op <strong class="text-white">Delen</strong> <svg class="icon mx-1" aria-hidden="true"><use href="/assets/icons.svg#arrow-up-from-bracket"></use></svg></li>
-                        <li>Kies <strong class="text-white">Zet op beginscherm</strong> <svg class="icon mx-1" aria-hidden="true"><use href="/assets/icons.svg#square-plus"></use></svg></li>
-                        <li>Open MatchTracker voortaan via het icoon op je beginscherm</li>
-                    </ol>
-                    <p class="mt-4 text-sm leading-relaxed">
-                        <strong class="text-sky-100">Waarom?</strong> Zo blijven je wedstrijden betrouwbaar bewaard. In een gewoon Safari-tabblad kan iOS je opgeslagen wedstrijden wissen als je de site een tijdje niet gebruikt.
-                        <a href="/uitleg/#iphone" class="underline underline-offset-2 text-sky-100">Meer uitleg</a>
+                <noscript>
+                    <p class="mt-4 text-sm text-slate-400 leading-relaxed">
+                        Op iPhone of iPad: open MatchTracker in Safari, tik op <strong class="text-white">Delen</strong> en kies
+                        <strong class="text-white">Zet op beginscherm</strong>. Zo blijven je wedstrijden betrouwbaar bewaard.
+                        De Android-app komt binnenkort in Google Play.
                     </p>
+                </noscript>
+            </div>
+
+            <!-- ===== iPhone / iPad ===== -->
+            <div data-variant="ios" hidden>
+                <div class="flex flex-col gap-5">
+                    <a href="/app/" class="flex items-center justify-center gap-3 w-full min-h-[64px] py-4 px-4 rounded-2xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold text-xl shadow-lg shadow-sky-900/30 border border-sky-500/50 transition-all active:scale-95">
+                        <svg class="icon text-2xl" aria-hidden="true"><use href="/assets/icons.svg#apple"></use></svg>
+                        Open MatchTracker
+                    </a>
+
+                    <div class="text-left bg-sky-900/20 border border-sky-800/50 rounded-2xl p-4 sm:p-5 text-sky-200">
+                        <strong class="flex items-center gap-2 text-sky-100 mb-3 text-base">
+                            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#square-plus"></use></svg>
+                            Zet hem op je beginscherm
+                        </strong>
+                        <ol class="list-decimal list-inside space-y-2 ml-1 text-[15px]">
+                            <li>Tik hierboven op <strong class="text-white">Open MatchTracker</strong> (in <strong class="text-white">Safari</strong>)</li>
+                            <li>Tik op <strong class="text-white">Delen</strong> <svg class="icon mx-1" aria-hidden="true"><use href="/assets/icons.svg#arrow-up-from-bracket"></use></svg></li>
+                            <li>Kies <strong class="text-white">Zet op beginscherm</strong> <svg class="icon mx-1" aria-hidden="true"><use href="/assets/icons.svg#square-plus"></use></svg></li>
+                            <li>Open MatchTracker voortaan via het icoon op je beginscherm</li>
+                        </ol>
+                        <p class="mt-4 text-sm leading-relaxed">
+                            <strong class="text-sky-100">Waarom?</strong> Zo blijven je wedstrijden betrouwbaar bewaard. In een gewoon Safari-tabblad kan iOS je opgeslagen wedstrijden wissen als je de site een tijdje niet gebruikt.
+                            <a href="/uitleg/#iphone" class="underline underline-offset-2 text-sky-100">Meer uitleg</a>
+                        </p>
+                    </div>
                 </div>
             </div>
 
             <!-- ===== Android ===== -->
-            <div data-show="android">
-                <!-- PLAY_LIVE (site.js): Play-knop als hoofdknop -->
-                <a data-play="live" href="https://play.google.com/store/apps/details?id=nl.matchtracker.app" class="flex items-center justify-center gap-3 w-full py-5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-brand-600 hover:from-emerald-500 hover:to-brand-500 text-white font-bold text-xl shadow-lg shadow-emerald-900/30 border border-emerald-500/50 transition-all active:scale-95">
-                    <svg class="icon text-2xl" aria-hidden="true"><use href="/assets/icons.svg#google-play"></use></svg>
-                    Download in Google Play
-                </a>
-                <a data-play="live" href="/app/" class="mt-4 inline-block text-sm text-slate-400 underline underline-offset-2 hover:text-white">
-                    Liever direct in de browser? Open de webapp
-                </a>
-
-                <!-- Nog niet in Play: webapp als hoofdknop -->
-                <a data-play="soon" href="/app/" class="flex items-center justify-center gap-3 w-full py-5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-brand-600 hover:from-emerald-500 hover:to-brand-500 text-white font-bold text-xl shadow-lg shadow-emerald-900/30 border border-emerald-500/50 transition-all active:scale-95">
-                    <svg class="icon text-2xl" aria-hidden="true"><use href="/assets/icons.svg#mobile-screen"></use></svg>
-                    Open MatchTracker
-                </a>
-                <p data-play="soon" class="mt-4 text-sm text-slate-400 leading-relaxed">
-                    Werkt direct in je browser. De Android-app komt binnenkort in Google Play.
-                </p>
+            <div data-variant="android" hidden>
+                <!-- PLAY_LIVE = true (site.js): Play-knop als hoofdknop -->
+                <div data-play="live" hidden>
+                    <div class="flex flex-col items-center gap-4">
+                        <a href="https://play.google.com/store/apps/details?id=nl.matchtracker.app" class="flex items-center justify-center gap-3 w-full min-h-[64px] py-4 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-brand-600 hover:from-emerald-500 hover:to-brand-500 text-white font-bold text-xl shadow-lg shadow-emerald-900/30 border border-emerald-500/50 transition-all active:scale-95">
+                            <svg class="icon text-2xl" aria-hidden="true"><use href="/assets/icons.svg#google-play"></use></svg>
+                            Download in Google Play
+                        </a>
+                        <a href="/app/" class="py-2 text-sm text-slate-400 underline underline-offset-2 hover:text-white">
+                            Liever direct in de browser? Open de webapp
+                        </a>
+                    </div>
+                </div>
+                <!-- PLAY_LIVE = false: webapp als hoofdknop -->
+                <div data-play="soon" hidden>
+                    <div class="flex flex-col gap-4">
+                        <a href="/app/" class="flex items-center justify-center gap-3 w-full min-h-[64px] py-4 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-brand-600 hover:from-emerald-500 hover:to-brand-500 text-white font-bold text-xl shadow-lg shadow-emerald-900/30 border border-emerald-500/50 transition-all active:scale-95">
+                            <svg class="icon text-2xl" aria-hidden="true"><use href="/assets/icons.svg#mobile-screen"></use></svg>
+                            Open MatchTracker
+                        </a>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Werkt direct in je browser. De Android-app komt binnenkort in Google Play.
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            <!-- ===== Computer (ook zonder JavaScript) ===== -->
-            <div data-show="desktop">
+            <!-- ===== Computer ===== -->
+            <div data-variant="desktop" hidden>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
                     <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 flex flex-col">
                         <h2 class="flex items-center gap-2 text-white font-semibold text-lg mb-2">
                             <svg class="icon text-emerald-400" aria-hidden="true"><use href="/assets/icons.svg#google-play"></use></svg>
                             Android
                         </h2>
-                        <p data-play="live" class="text-sm text-slate-400 mb-4 flex-1">Installeer de app op je Android-telefoon via Google Play.</p>
-                        <a data-play="live" href="https://play.google.com/store/apps/details?id=nl.matchtracker.app" class="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-brand-600 text-white font-bold border border-emerald-500/50 transition-all active:scale-95">
-                            Download in Google Play
-                        </a>
-                        <p data-play="soon" class="text-sm text-slate-400 mb-4 flex-1">Komt binnenkort in Google Play. Tot die tijd werkt de webapp ook op Android.</p>
-                        <div data-play="soon" aria-disabled="true" class="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-slate-800 text-slate-400 text-sm font-bold whitespace-nowrap border border-slate-700 cursor-default select-none">
-                            Binnenkort op Google Play
+                        <div data-play="live" hidden class="flex-1">
+                            <div class="h-full flex flex-col gap-4">
+                                <p class="text-sm text-slate-400 flex-1">Installeer de app op je Android-telefoon via Google Play.</p>
+                                <a href="https://play.google.com/store/apps/details?id=nl.matchtracker.app" class="flex items-center justify-center gap-2 w-full min-h-[48px] py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-brand-600 text-white font-bold border border-emerald-500/50 transition-all active:scale-95">
+                                    Download in Google Play
+                                </a>
+                            </div>
+                        </div>
+                        <div data-play="soon" hidden class="flex-1">
+                            <div class="h-full flex flex-col gap-4">
+                                <p class="text-sm text-slate-400 flex-1">Komt binnenkort in Google Play. Tot die tijd werkt de webapp ook op Android.</p>
+                                <div aria-disabled="true" class="flex items-center justify-center gap-2 w-full min-h-[48px] py-3 px-4 rounded-xl bg-slate-800 text-slate-400 text-sm font-bold whitespace-nowrap border border-slate-700 cursor-default select-none">
+                                    Binnenkort op Google Play
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 flex flex-col">
@@ -117,15 +155,19 @@
                             <svg class="icon text-sky-400" aria-hidden="true"><use href="/assets/icons.svg#apple"></use></svg>
                             iPhone, iPad en browser
                         </h2>
-                        <p class="text-sm text-slate-400 mb-4 flex-1">Gebruik MatchTracker als webapp. Op iPhone of iPad zet je hem via Safari op je beginscherm.</p>
-                        <a href="/app/" class="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold border border-sky-500/50 transition-all active:scale-95">
-                            Open de webapp
-                        </a>
+                        <div class="flex-1 flex flex-col gap-4">
+                            <p class="text-sm text-slate-400 flex-1">Gebruik MatchTracker als webapp. Op iPhone of iPad zet je hem via Safari op je beginscherm.</p>
+                            <a href="/app/" class="flex items-center justify-center gap-2 w-full min-h-[48px] py-3 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 text-white font-bold border border-sky-500/50 transition-all active:scale-95">
+                                Open de webapp
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <p class="mt-6 text-sm text-slate-500">
                     Tip: open deze pagina op je telefoon, dan zie je direct de juiste knop.
                 </p>
+            </div>
+
             </div>
 
             <p class="mt-10 text-sm text-slate-500">

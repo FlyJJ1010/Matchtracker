@@ -6,7 +6,8 @@
     "build:css": "tailwindcss -c tailwind.config.js -i _build/input.css -o assets/css/site.css --minify",
     "build:icons": "node _build/build-icons.mjs",
     "build:images": "node _build/render-images.mjs",
-    "build": "npm run build:icons && npm run build:css"
+    "build": "npm run build:icons && npm run build:css && npm run build:stamp",
+    "build:stamp": "node _build/stamp-assets.mjs"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "6.4.0",

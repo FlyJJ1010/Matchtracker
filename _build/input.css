@@ -13,16 +13,8 @@
   }
   .btn-inactive { opacity: 0.35; filter: grayscale(100%); }
 
-  /* Per apparaat tonen (site.js zet data-device op <html>). Zonder JavaScript: de computerweergave. */
-  [data-show] { display: none; }
-  html[data-device="ios"] [data-show~="ios"],
-  html[data-device="android"] [data-show~="android"],
-  html[data-device="desktop"] [data-show~="desktop"],
-  html:not([data-device]) [data-show~="desktop"] { display: block; }
-
-  /* Google Play: [data-play="live"] alleen als PLAY_LIVE, [data-play="soon"] alleen als nog niet. */
-  html:not(.play-live) [data-play="live"],
-  html.play-live [data-play="soon"] { display: none !important; }
+  /* Het hidden-attribuut wint altijd, ook van display-klassen zoals flex (o.a. /start/, site.js). */
+  [hidden] { display: none !important; }
 
   /* Tekstpagina's (uitleg, privacy) */
   .prose-mt { @apply text-slate-300 leading-relaxed; }
