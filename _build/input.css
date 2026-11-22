@@ -23,7 +23,7 @@
   .prose-mt p { @apply mb-4; }
   .prose-mt ul { @apply list-disc pl-6 mb-4 space-y-1; }
   .prose-mt ol { @apply list-decimal pl-6 mb-4 space-y-1; }
-  .prose-mt a { @apply text-brand-400 underline underline-offset-2 hover:text-brand-500; }
+  .prose-mt a { @apply text-brand-400 underline underline-offset-2 hover:text-brand-500; overflow-wrap: anywhere; }
   .prose-mt strong { @apply text-white; }
 
   .faq { @apply bg-slate-900/50 border border-slate-800 rounded-2xl mb-3 overflow-hidden; }
@@ -37,4 +37,11 @@
   .faq > div ol { @apply list-decimal pl-6 mb-3 space-y-1; }
   .faq > div strong { @apply text-slate-200; }
   .faq > div a { @apply text-brand-400 underline underline-offset-2; }
+
+  /* Platformlabels: v3-functies zitten (nog) alleen in de Android-app in test, niet in de webapp. */
+  .tag-android, .tag-web { @apply inline-block mt-1.5 px-2 py-0.5 rounded-md text-xs font-semibold leading-snug border; }
+  .tag-android { @apply bg-emerald-500/10 border-emerald-500/40 text-emerald-300; }
+  .tag-web { @apply bg-sky-500/10 border-sky-500/40 text-sky-300; }
+  .faq summary > span:first-child { @apply min-w-0; }
+  .faq summary .tag-android, .faq summary .tag-web { @apply block w-fit; }
 }
