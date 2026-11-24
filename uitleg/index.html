@@ -19,7 +19,7 @@
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="stylesheet" href="/assets/css/site.css?v=5b2ec687a2">
+    <link rel="stylesheet" href="/assets/css/site.css?v=cefeabb2ba">
     <script src="/assets/js/site.js?v=acc35933c6" defer></script>
     <!-- advertentie head --><!-- /advertentie head -->
 </head>
@@ -159,7 +159,34 @@
                         <li><strong>Onderbreking</strong>: de klok staat stil, bijvoorbeeld bij een blessure of onweer. Het wedstrijdboek noteert het begin, met kloktijd en speelminuut.</li>
                         <li><strong>Ga verder</strong>: de klok loopt verder. Het wedstrijdboek noteert wanneer het spel is hervat en hoe lang de onderbreking duurde.</li>
                     </ul>
-                    <p>Het totaal van alle onderbrekingen zie je in de samenvatting en bij de bewaarde wedstrijd. <strong>Reset tijd</strong> en <strong>Score Reset</strong> werken zoals in de webapp.</p>
+                    <p>Het totaal van alle onderbrekingen zie je in de samenvatting en bij de bewaarde wedstrijd.</p>
+                    <p><strong>Tijd Reset</strong> staat rechtsboven in het Tijd-vak, net als <strong>Score Reset</strong> bij het scorebord. Tijd Reset zet alleen de klok van de huidige helft of het huidige kwart terug op 00:00; de stand van de wedstrijd verandert niet en er wordt niets opgeslagen. Na Einde wedstrijd of een staking werkt Tijd Reset niet meer.</p>
+                    <figure class="my-4 max-w-xs mx-auto">
+                        <img src="/assets/img/app/scherm-klok.webp" width="720" height="1091" loading="lazy" decoding="async"
+                             alt="Het Tijd-vak: Tijd Reset rechtsboven, de knop 2e Helft · 45 min met Wissel, de gespeelde tijd per helft, de klok op 44:12 en de knop Onderbreking."
+                             class="w-full h-auto rounded-2xl border border-slate-700/50">
+                    </figure>
+                </div>
+            </details>
+
+            <details class="faq" id="periode">
+                <summary><span>Hoe wissel ik van helft of kwart?<span class="tag-android">Android-app (in test); komt later naar de webapp</span></span></summary>
+                <div>
+                    <p>Boven de klok staat één knop met de periode en de speeltijd, bijvoorbeeld <strong>1e Helft · 45 min</strong>. Daaronder zie je de gespeelde tijd per periode, het totaal en eventuele onderbrekingen.</p>
+                    <ul>
+                        <li><strong>Helften:</strong> één tik wisselt naar de andere helft.</li>
+                        <li><strong>Kwarten:</strong> je kiest het kwart uit een lijst, met per kwart de gespeelde tijd.</li>
+                    </ul>
+                    <p>Vóór de start wissel je direct. Loopt de wedstrijd al, dan vraagt de app eerst of je het zeker weet, bijvoorbeeld <strong>"Weet je zeker dat je naar de 2e helft wilt gaan?"</strong>. Bij een wissel stopt de klok; hij start niet vanzelf. De gespeelde tijd per periode blijft bewaard, dus ga je terug, dan loopt de klok verder vanaf die stand. De wissel komt in het wedstrijdboek.</p>
+                    <p>Voor de gewone rust gebruik je de rustknop (zie hieronder).</p>
+                </div>
+            </details>
+
+            <details class="faq">
+                <summary><span>Waarom kan ik nog geen doelpunt invoeren?<span class="tag-android">Android-app (in test); komt later naar de webapp</span></span></summary>
+                <div>
+                    <p>In de Android-app start je eerst de wedstrijd. Zolang de klok op <strong>Klaar om te beginnen</strong> staat, zijn doelpunt, kaarten en wissel uitgeschakeld; tik je er toch op, dan zie je <strong>"Start eerst de wedstrijd"</strong>.</p>
+                    <p>Teamnamen, sport, speeltijd en de rustinstellingen kun je vóór de start wel aanpassen. Het wedstrijdboek begint bij de start, met de regel <strong>Start 1e Helft</strong> (of <strong>Start 1e Kwart</strong>).</p>
                 </div>
             </details>
 
@@ -198,8 +225,19 @@
             <details class="faq">
                 <summary><span>Hoe begin ik een nieuwe wedstrijd?<span class="tag-android">Android-app (in test); komt later naar de webapp</span></span></summary>
                 <div>
-                    <p>Gebruik onderaan de knop <strong>Opslaan en nieuwe wedstrijd</strong>. Die staat bewust ver van Start en Onderbreking. De huidige wedstrijd wordt eerst bewaard onder Wedstrijden, daarna begin je helemaal opnieuw. Loopt de wedstrijd nog, dan vraagt de app eerst of je het zeker weet.</p>
-                    <p>In de webapp heet deze knop nu <strong>Nieuwe wedstrijd</strong> en doet hij hetzelfde.</p>
+                    <p>Gebruik onderaan de knop <strong>Nieuwe wedstrijd</strong>. Die staat bewust ver van Start en Onderbreking. Staat er al iets in de wedstrijd, dan vraagt de app eerst: <strong>"Wedstrijd opslaan of verwijderen?"</strong></p>
+                    <ul>
+                        <li><strong>Opslaan</strong>: de wedstrijd komt onder Wedstrijden en je begint opnieuw.</li>
+                        <li><strong>Verwijderen</strong>: de app vraagt nog een keer of je het zeker weet.</li>
+                        <li><strong>Annuleren</strong>: alles blijft staan.</li>
+                    </ul>
+                    <p>Dezelfde vraag krijg je als je na Einde wedstrijd of een staking opnieuw op <strong>Start</strong> drukt. Sta je in de 1e helft nog op 00:00 terwijl de wedstrijd al loopt, dan kun je ook kiezen voor <strong>Doorgaan met deze wedstrijd</strong>. Bij een lege wedstrijd komt er geen vraag. De klok telt vanaf je tik op Start, dus de vraag kost geen speeltijd.</p>
+                    <figure class="my-4 max-w-xs mx-auto">
+                        <img src="/assets/img/app/scherm-opslaan-verwijderen.webp" width="720" height="654" loading="lazy" decoding="async"
+                             alt="De vraag Wedstrijd opslaan of verwijderen? met de knoppen Opslaan, Verwijderen en Annuleren."
+                             class="w-full h-auto rounded-2xl border border-slate-700/50">
+                    </figure>
+                    <p>In de webapp bewaart <strong>Nieuwe wedstrijd</strong> de wedstrijd nu altijd eerst onder Wedstrijden.</p>
                 </div>
             </details>
 
@@ -239,7 +277,16 @@
                 <div>
                     <p>Tik op het pijltje omhoog boven de score van een team om een doelpunt toe te voegen. Met het pijltje omlaag haal je een doelpunt weg, bijvoorbeeld als je je vergist.</p>
                     <p><span class="tag-web">Webapp (nu)</span><br>Zet <strong>Doelpuntenmaker vastleggen</strong> aan als je bij elk doelpunt ook de speler wilt noteren.</p>
-                    <p><span class="tag-android">Android-app (in test); komt later naar de webapp</span><br>Het doelpunt telt meteen. Daarna kun je in een venster het <a href="#soort-doelpunt">soort doelpunt</a> en de doelpuntmaker kiezen. Allebei optioneel: sluit het venster en het blijft een gewoon doelpunt.</p>
+                    <p><span class="tag-android">Android-app (in test); komt later naar de webapp</span><br>Met de schakelaar <strong>Doelpunt details toevoegen</strong> bij het scorebord kies je hoe een doelpunt werkt:</p>
+                    <ul>
+                        <li><strong>Uit:</strong> één tik is een gewoon doelpunt.</li>
+                        <li><strong>Aan:</strong> het doelpunt telt meteen en onder het scorebord opent een paneel. Daar kies je het <a href="#soort-doelpunt">soort doelpunt</a> en vul je eventueel rugnummer en naam in. De knop <strong>Klaar</strong> telt af van 10; elke aanraking zet hem terug op 10. Doe je niets, dan blijft het een gewoon doelpunt.</li>
+                    </ul>
+                    <figure class="my-4 max-w-xs mx-auto">
+                        <img src="/assets/img/app/scherm-doelpunt-details.webp" width="720" height="1180" loading="lazy" decoding="async"
+                             alt="Het scorebord met Doelpunt details toevoegen aan: een paneel met Gewoon, Eigen doelpunt en Penalty, velden voor rugnummer en naam, en de knop Klaar (7)."
+                             class="w-full h-auto rounded-2xl border border-slate-700/50">
+                    </figure>
                 </div>
             </details>
 
@@ -282,6 +329,12 @@
                 <div>
                     <p>Bij een groene of gele kaart in hockey kun je de duur kiezen: <strong>2 minuten</strong> bij groen, <strong>5 of 10 minuten</strong> bij geel, of zelf een duur van 1 tot 30 minuten. Niets kiezen mag ook.</p>
                     <p>Heeft een kaart een duur, dan verschijnt onder de klok een <strong>timer</strong> voor die speler. De timer telt alleen gespeelde tijd: onderbrekingen, rust en kwartpauzes tellen niet mee, en de rest van de straf loopt door in de volgende periode. Is de tijd om, dan zie je dat de speler terug mag, en klinkt er een signaal als de app op dat moment in beeld is.</p>
+                    <p>Per team zie je hoeveel spelers er op dat moment minder staan, bijvoorbeeld <strong>1 speler minder</strong>. Een speler met rood staat er als <strong>uitgesloten</strong> bij.</p>
+                    <figure class="my-4 max-w-xs mx-auto">
+                        <img src="/assets/img/app/scherm-tijdstraf.webp" width="720" height="1245" loading="lazy" decoding="async"
+                             alt="Hockey, 3e kwart: onder de klok staat 1 speler minder en een timer voor een gele kaart van speler 3 met nog 3:00."
+                             class="w-full h-auto rounded-2xl border border-slate-700/50">
+                    </figure>
                     <p>Tip: zet bij tijdstraffen <strong>Scherm aan houden</strong> aan. De app wijst je daar bij de eerste tijdstraf op.</p>
                 </div>
             </details>
@@ -332,26 +385,38 @@
                 <summary><span>Wat staat er in de samenvatting?<span class="tag-android">Android-app (in test); komt later naar de webapp</span></span></summary>
                 <div>
                     <p>Na <strong>Einde wedstrijd</strong> opent de samenvatting vanzelf. Je vindt hem ook met de knop <strong>Samenvatting</strong> bij een afgelopen of bewaarde wedstrijd.</p>
-                    <p>Je ziet de eindstand, de doelpunten per periode (met het soort doelpunt), de kaarten, de speeltijd en eventuele onderbrekingen of een staking met reden.</p>
+                    <p>Bovenaan staan de teamnamen en de eindstand groot (of de stand bij staken), met de datum en de begin- en eindtijd. Daaronder zie je de doelpunten per periode met de stand na elke periode en na elk doelpunt, het soort doelpunt, de kaarten, de wissels, de speeltijd en eventuele onderbrekingen of een staking met reden.</p>
+                    <figure class="my-4 max-w-xs mx-auto">
+                        <img src="/assets/img/app/scherm-samenvatting.webp" width="720" height="1919" loading="lazy" decoding="async"
+                             alt="De samenvatting van FC Voorbeeld 3 – 2 SV Demo: doelpunten per helft met de stand, kaarten, wissels, speeltijd en de knoppen Delen als afbeelding, Delen als tekst en Sluiten."
+                             class="w-full h-auto rounded-2xl border border-slate-700/50">
+                    </figure>
                 </div>
             </details>
 
-            <details class="faq">
-                <summary>Hoe exporteer of deel ik een wedstrijd?</summary>
+            <details class="faq" id="delen">
+                <summary>Hoe deel ik een wedstrijd?</summary>
                 <div>
-                    <p>Open een wedstrijd onder Wedstrijden en kies:</p>
+                    <p><span class="tag-android">Android-app (in test); komt later naar de webapp</span><br>Open de samenvatting (na afloop of onder Wedstrijden) en kies:</p>
                     <ul>
-                        <li><strong>Delen als tekst:</strong> opent het deelmenu (bijvoorbeeld WhatsApp of Mail). Heeft je browser geen deelmenu, dan wordt een tekstbestand gedownload.</li>
-                        <li><strong>Delen als CSV:</strong> in de Android-app via het deelmenu; in de webapp wordt het CSV-bestand gedownload (op iPhone in de app Bestanden). Dat bestand kun je openen in Excel of Numbers.</li>
+                        <li><strong>Delen als afbeelding</strong> (de groene knop): de samenvatting als afbeelding, zonder knoppen en zonder wissels. Is de wedstrijd lang, dan worden het twee afbeeldingen ("Deel 2 van 2"). Je kiest zelf de app, bijvoorbeeld WhatsApp.</li>
+                        <li><strong>Delen als tekst:</strong> dezelfde wedstrijd als tekstbericht.</li>
                     </ul>
-                    <p>Jij kiest met wie je deelt. Staan er spelersnamen in, gebruik dan liever rugnummers.</p>
+                    <p>Bij Delen als afbeelding gaat standaard een korte tekst met een link naar match-tracker.nl mee, die bijvoorbeeld in WhatsApp als bijschrift verschijnt. De link is voor iedereen hetzelfde en bevat geen gegevens over jou of de wedstrijd. Je kunt de tekst vóór het versturen aanpassen of weghalen, of hem uitzetten met <strong>Link meesturen</strong> onder het tandwiel.</p>
+                    <figure class="my-4 max-w-xs mx-auto">
+                        <img src="/assets/img/app/deel-afbeelding.webp" width="720" height="1178" loading="lazy" decoding="async"
+                             alt="Een gedeelde afbeelding: eindstand FC Voorbeeld 3 – 2 SV Demo, doelpunten met de stand per helft, kaarten en speeltijd, met onderaan mogelijk gemaakt door match-tracker.nl."
+                             class="w-full h-auto rounded-2xl border border-slate-700/50">
+                    </figure>
+                    <p><span class="tag-web">Webapp (nu)</span><br>Open een wedstrijd onder Wedstrijden en kies <strong>Delen als tekst</strong> (deelmenu, of een tekstbestand als je browser geen deelmenu heeft) of <strong>Delen als CSV</strong> (het bestand wordt gedownload, op iPhone in de app Bestanden; te openen in Excel of Numbers).</p>
+                    <p>Jij kiest met wie je deelt. Bekijk wat erop staat voordat je iets verstuurt; een verstuurde afbeelding kun je niet terughalen. Staan er spelersnamen in, gebruik dan liever rugnummers.</p>
                 </div>
             </details>
 
             <details class="faq">
                 <summary>Komen mijn wedstrijden uit de Android-app ook in de webapp?</summary>
                 <div>
-                    <p>Nee. De Android-app en de webapp hebben elk hun eigen opslag op het toestel. Er is geen account en geen synchronisatie, dus wedstrijden gaan niet automatisch van de ene naar de andere app of naar een ander toestel. Wil je een wedstrijd bewaren of doorsturen, gebruik dan <strong>Delen als tekst</strong> of <strong>Delen als CSV</strong>.</p>
+                    <p>Nee. De Android-app en de webapp hebben elk hun eigen opslag op het toestel. Er is geen account en geen synchronisatie, dus wedstrijden gaan niet automatisch van de ene naar de andere app of naar een ander toestel. Wil je een wedstrijd bewaren of doorsturen, gebruik dan <a href="#delen">delen</a>.</p>
                     <p>Op de iPhone geldt dat ook voor Safari: de app op je beginscherm heeft een eigen opslag, los van een gewoon Safari-tabblad. Open MatchTracker dus altijd via het icoon op je beginscherm.</p>
                 </div>
             </details>
@@ -366,7 +431,15 @@
                         <li><strong>Geen advertenties</strong>;</li>
                         <li><strong>Meerdere teams</strong> in Mijn team (één team blijft gratis).</li>
                     </ul>
-                    <p>Al het andere op deze pagina werkt ook in de gratis versie. Kocht je Pro al eerder, dan haal je je aankoop terug met <strong>Aankoop herstellen</strong>.</p>
+                    <p>Kocht je Pro al eerder, bijvoorbeeld op een andere telefoon, dan haal je je aankoop terug met <strong>Aankoop herstellen</strong> onder het tandwiel.</p>
+                </div>
+            </details>
+
+            <details class="faq">
+                <summary><span>Wat is gratis?<span class="tag-android">Android-app (in test); komt later naar de webapp</span></span></summary>
+                <div>
+                    <p>Alles op deze pagina behalve wat hierboven bij Pro staat: de klok, rust en onderbrekingen, doelpunten met details, kaarten en de tijdstraf-timer, de samenvatting, delen als afbeelding en als tekst, en <strong>één team</strong> in Mijn team. De gratis versie toont advertenties.</p>
+                    <p>Heb je geen Pro meer, dan blijven al je teams en wedstrijden gewoon staan en bruikbaar. Alleen een nieuw team toevoegen vraagt dan weer om Pro.</p>
                 </div>
             </details>
 
@@ -379,7 +452,6 @@
                     <li>statistieken</li>
                     <li>wisselschema</li>
                     <li>teams delen</li>
-                    <li>delen als afbeelding</li>
                 </ul>
             </div>
 
