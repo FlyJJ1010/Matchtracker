@@ -14,6 +14,26 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="stylesheet" href="/assets/css/site.css?v=cefeabb2ba">
     <script src="/assets/js/site.js?v=acc35933c6" defer></script>
+    <!--
+    Teller (GoatCounter), ALLEEN op deze pagina: geen cookies, niets in de browser opgeslagen.
+    Het pad wordt "/start/?p=<code>" (of "/start/" zonder code), zodat het dashboard per code één regel toont.
+    Andere parameters (bijv. fbclid) vallen weg; de code wordt beperkt tot a-z, 0-9 en "-" (max. 40 tekens).
+    Bijbehorende tekst: privacy/index.html, "Meten op de website".
+    -->
+    <script>
+        window.goatcounter = {
+            path: function () {
+                var code = '';
+                try {
+                    var m = /[?&]p=([^&#]*)/.exec(location.search);
+                    if (m) code = decodeURIComponent(m[1].replace(/\+/g, ' '));
+                } catch (e) { code = ''; }
+                code = code.toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 40);
+                return code ? '/start/?p=' + code : '/start/';
+            }
+        };
+    </script>
+    <script data-goatcounter="https://match-tracker.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body class="bg-slate-950 text-slate-300 font-sans antialiased overflow-x-hidden relative min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
