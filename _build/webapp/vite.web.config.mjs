@@ -65,8 +65,33 @@ function hideMonetization(html) {
   }
   // "Status: Gratis versie (met reclame)" onder het scorebord, inclusief de scheidingslijn.
   html = mustReplace(html, /(<!-- Advertentie-status -->\s*<div) /, '$1 data-mt-web-hidden ', 'advertentie-status');
+  html = webTeamsModal(html);
   return mustReplace(html, '</head>',
     '    <style>[data-mt-web-hidden]{display:none!important}</style>\n</head>', '</head>');
+}
+
+// Teams (vanaf app 3.1): gratis is één team. In de app opent "+ Team toevoegen" bij het tweede team
+// de Pro-uitleg met "Bekijk Pro" (naar het koopscherm). Op het web is er geen Pro: dezelfde melding,
+// maar kort en zonder koopknop. De id's blijven staan omdat src/teams.js ze gebruikt.
+function webTeamsModal(html) {
+  html = mustReplace(html, /(<div id="proteams-modal"[\s\S]*?)<i class="fa-solid fa-crown"><\/i>/,
+    '$1<i class="fa-solid fa-users"></i>', 'proteams-modal: icoon');
+  html = mustReplace(html, '>Meerdere teams zijn onderdeel van Pro</h3>', '>Eén team in de webapp</h3>', 'proteams-modal: titel');
+  html = mustReplace(html,
+    /<p class="([^"]*)">Mijn team \(één team\) is gratis\. Pro bevat nu:<\/p>\s*<ul[\s\S]*?<\/ul>/,
+    '<p class="$1">In de webapp bewaar je één team. Andere teamnamen typ je gewoon bij de wedstrijd.</p>',
+    'proteams-modal: Pro-lijst');
+  html = mustReplace(html, 'id="proteams-price"', 'id="proteams-price" data-mt-web-hidden', 'proteams-price');
+  html = mustReplace(html, /<button data-action="proteams-view"[^>]*>Bekijk Pro<\/button>\s*/, '', 'proteams-modal: Bekijk Pro');
+  return mustReplace(html, /(<button data-action="close-proteams"[^>]*>)Niet nu</, '$1Oké<', 'proteams-modal: Niet nu');
+}
+
+// Zelfde gedachte in de teamlijst (src/teams.js): geen "Pro"-label op "Team toevoegen" en een webtekst.
+function webTeamsCode(code) {
+  code = mustReplace(code, /(\n\s*)b\.append\(el\('span', '[^']*', 'Pro'\)\);/, '$1/* web: geen Pro-label */',
+    'teams.js: Pro-label');
+  return mustReplace(code, "'Al je teams blijven bruikbaar. Een nieuw team toevoegen hoort bij Pro.'",
+    "'Al je teams blijven bruikbaar. In de webapp bewaar je één team.'", 'teams.js: Pro-tekst');
 }
 
 function webPlatformPlugin() {
@@ -79,6 +104,7 @@ function webPlatformPlugin() {
     },
     // Privacybeleid-knop in de app: op het web naar de eigen site (Android ongewijzigd).
     transform(code, id) {
+      if (id.replace(/\\/g, '/').endsWith('/src/teams.js')) return webTeamsCode(code);
       if (!id.replace(/\\/g, '/').endsWith('/src/config/app.config.js')) return null;
       return mustReplace(code, /export const PRIVACY_POLICY_URL = '[^']*';/,
         `export const PRIVACY_POLICY_URL = '${WEB_PRIVACY_URL}';`, 'PRIVACY_POLICY_URL');

@@ -1,7 +1,7 @@
 // MatchTracker service worker (scope /app/). Gegenereerd door _build/webapp/vite.web.config.mjs.
 // Bewaart de hele app offline, zodat hij zonder bereik start. Elke nieuwe build krijgt een
 // nieuw versienummer: dan wordt alles opnieuw opgehaald en de oude cache opgeruimd.
-const VERSION = '1.0.0-08bcee4e67';
+const VERSION = '3.1.4-d7f7b1b23c';
 const CACHE = `matchtracker-app-${VERSION}`;
 const PRECACHE = [
   "/app/assets/chakra-petch-latin-600-normal-DVQm9bgb.woff2",
@@ -16,8 +16,8 @@ const PRECACHE = [
   "/app/assets/fa-regular-400-BjRzuEpd.woff2",
   "/app/assets/fa-solid-900-CTAAxXor.woff2",
   "/app/assets/fa-v4compatibility-C9RhG_FT.woff2",
-  "/app/assets/index-C7EmxtG9.js",
-  "/app/assets/index-CXIcIWdd.css",
+  "/app/assets/index-C0uTjgem.js",
+  "/app/assets/index-DjQCoGxd.css",
   "/app/assets/inter-cyrillic-400-normal-obahsSVq.woff2",
   "/app/assets/inter-cyrillic-500-normal-BasfLYem.woff2",
   "/app/assets/inter-cyrillic-600-normal-CWCymEST.woff2",
@@ -46,7 +46,7 @@ const PRECACHE = [
   "/app/assets/inter-vietnamese-500-normal-DOriooB6.woff2",
   "/app/assets/inter-vietnamese-600-normal-Cc8MFFhd.woff2",
   "/app/assets/inter-vietnamese-700-normal-DlLaEgI2.woff2",
-  "/app/assets/web-CVQl2qX7.js",
+  "/app/assets/web-DAXDB7Uo.js",
   "/app/",
   "/app/manifest.json",
   "/favicon.ico",
